@@ -61,4 +61,29 @@ test.describe("User login process", () => {
       },
     );
   }
+
+  test(
+    "User should be logged and logged out correctly",
+    { tag: ["@smoke", "@logout", "@happyPath"]},
+    async ({ page }) => {
+      // Arrange:
+      const expectedElementByTestId = page.getByTestId("hello");
+
+      await loginPage.mouseHover.hover();
+      await loginPage.loginLink.click();
+      await loginPage.loginInput.fill(loginUserData.userCorrectLogin!);
+      await loginPage.passwordInput.fill(loginUserData.userCorrectPassword!);
+      await loginPage.loginButton.click();
+
+      await expect(expectedElementByTestId).toContainText(
+        `Hi ${loginUserData.userCorrectLogin}!`,
+      );
+
+      // Act:
+      await loginPage.logoutButton.click();
+
+      // Assert:
+      await expect(page).toHaveURL("/login/");
+    },
+  );
 });
