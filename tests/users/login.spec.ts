@@ -1,28 +1,10 @@
 import { test, expect } from "@playwright/test";
+import {
+  invalidLoginCases,
+loginUserData
+} from "./test-data/login.data";
 
 test.describe("User login process", () => {
-  const invalidLoginCases = [
-    {
-      testName: "User should not be logged due to incorrect password",
-      email: "Kerra.JD@test.net",
-      password: "gdsass",
-      shouldValidatePlaceholder: false,
-    },
-    {
-      testName: "User should not be logged due to incorrect user mail",
-      email: "Kerra.JD@test.nets",
-      password: "gdsa",
-      shouldValidatePlaceholder: true,
-    },
-    {
-      testName:
-        "User should not be logged due to incorrect user mail (space in password)",
-      email: " Kerra.JD@test.net",
-      password: "gdsa",
-      shouldValidatePlaceholder: true,
-    },
-  ];
-
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
   });
@@ -39,13 +21,15 @@ test.describe("User login process", () => {
       await page.getByRole("link", { name: "Login" }).click();
       await page
         .getByRole("textbox", { name: "Enter User Email" })
-        .fill("Kerra.JD@test.net");
-      await page.getByRole("textbox", { name: "Enter Password" }).fill("gdsa");
+        .fill(loginUserData.userCorrectLogin);
+      await page
+        .getByRole("textbox", { name: "Enter Password" })
+        .fill(loginUserData.userCorrectPassword);
       await page.getByRole("button", { name: "LogIn" }).click();
 
       // Assert:
       await expect(expectedElementByTestId).toContainText(
-        "Hi Kerra.JD@test.net!",
+        `Hi ${loginUserData.userCorrectLogin}!`,
       );
     },
   );
