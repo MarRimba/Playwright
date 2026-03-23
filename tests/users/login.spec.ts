@@ -20,8 +20,8 @@ test.describe("User login process", () => {
       // Act:
       await loginPage.mouseHover.hover();
       await loginPage.loginLink.click();
-      await loginPage.loginInput.fill(loginUserData.userCorrectLogin);
-      await loginPage.passwordInput.fill(loginUserData.userCorrectPassword);
+      await loginPage.loginInput.fill(loginUserData.userCorrectLogin!);
+      await loginPage.passwordInput.fill(loginUserData.userCorrectPassword!);
       await loginPage.loginButton.click();
 
       // Assert:
@@ -43,8 +43,8 @@ test.describe("User login process", () => {
         // Act:
         await loginPage.mouseHover.hover();
         await loginPage.loginLink.click();
-        await loginPage.loginInput.fill(testCase.email);
-        await loginPage.passwordInput.fill(testCase.password);
+        await loginPage.loginInput.fill(testCase.email!);
+        await loginPage.passwordInput.fill(testCase.password!);
         await loginPage.loginButton.click();
 
         // Assert:

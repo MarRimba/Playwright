@@ -1,9 +1,10 @@
+import "dotenv/config";
 import { faker } from "@faker-js/faker";
 
 export const loginUserData = {
-userCorrectLogin : "Kerra.JD@test.net",
-userCorrectPassword : "gdsa",
-}
+  userCorrectLogin: process.env.LOGIN_EMAIL,
+  userCorrectPassword: process.env.LOGIN_PASSWORD,
+};
 
 export const invalidLoginCases = [
   {

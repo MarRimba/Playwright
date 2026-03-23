@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
-      "test:headed": "playwright test --headed",
-      "test:debug": "playwright test --debug",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
     "test:ui": "playwright test --ui",
     "test:login": "playwright test tests/users/login.spec.ts",
     "test:register": "playwright test tests/users/register.spec.ts",
@@ -30,6 +30,7 @@
     "@types/node": "^25.5.0"
   },
   "dependencies": {
-    "@faker-js/faker": "^10.3.0"
+    "@faker-js/faker": "^10.3.0",
+    "dotenv": "^17.3.1"
   }
 }
