@@ -1,8 +1,6 @@
 import { test, expect } from "@playwright/test";
-import {
-  invalidLoginCases,
-loginUserData
-} from "./test-data/login.data";
+import { invalidLoginCases, loginUserData } from "./test-data/login.data";
+import { LoginPage } from "../../pages/login.page";
 
 test.describe("User login process", () => {
   test.beforeEach(async ({ page }) => {
@@ -15,17 +13,14 @@ test.describe("User login process", () => {
     async ({ page }) => {
       // Arrange:
       const expectedElementByTestId = page.getByTestId("hello");
+      const loginPage = new LoginPage(page);
 
       // Act:
-      await page.getByTestId("btn-dropdown").hover();
-      await page.getByRole("link", { name: "Login" }).click();
-      await page
-        .getByRole("textbox", { name: "Enter User Email" })
-        .fill(loginUserData.userCorrectLogin);
-      await page
-        .getByRole("textbox", { name: "Enter Password" })
-        .fill(loginUserData.userCorrectPassword);
-      await page.getByRole("button", { name: "LogIn" }).click();
+      await loginPage.mouseHover.hover();
+      await loginPage.loginLink.click();
+      await loginPage.loginInput.fill(loginUserData.userCorrectLogin);
+      await loginPage.passwordInput.fill(loginUserData.userCorrectPassword);
+      await loginPage.loginButton.click();
 
       // Assert:
       await expect(expectedElementByTestId).toContainText(
@@ -42,17 +37,14 @@ test.describe("User login process", () => {
         // Arrange:
         const expectedElementByTestId = page.getByTestId("login-error");
         const expectedPlaceHolder = page.getByPlaceholder("Enter User Email");
+        const loginPage = new LoginPage(page);
 
         // Act:
-        await page.getByTestId("btn-dropdown").hover();
-        await page.getByRole("link", { name: "Login" }).click();
-        await page
-          .getByRole("textbox", { name: "Enter User Email" })
-          .fill(testCase.email);
-        await page
-          .getByRole("textbox", { name: "Enter Password" })
-          .fill(testCase.password);
-        await page.getByRole("button", { name: "LogIn" }).click();
+        await loginPage.mouseHover.hover();
+        await loginPage.loginLink.click();
+        await loginPage.loginInput.fill(testCase.email);
+        await loginPage.passwordInput.fill(testCase.password);
+        await loginPage.loginButton.click();
 
         // Assert:
         await expect(expectedElementByTestId).toContainText(

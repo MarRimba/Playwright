@@ -1,7 +1,5 @@
 import { faker } from "@faker-js/faker";
 
-
-
 export const loginUserData = {
 userCorrectLogin : "Kerra.JD@test.net",
 userCorrectPassword : "gdsa",
