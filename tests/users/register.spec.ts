@@ -1,12 +1,15 @@
 import { test, expect } from "@playwright/test";
-import { requiredFieldCases, userData} from "./test-data/register.data";
+import { requiredFieldCases, userData } from "./test-data/register.data";
+import { RegisterPage } from "../../pages/register.page";
 
 test.describe("User registration", () => {
-
+  let registerPage: RegisterPage;
 
   test.beforeEach(async ({ page }) => {
+    registerPage = new RegisterPage(page);
     await page.goto("/login");
   });
+
   test(
     "should register a new user",
     { tag: ["@smoke", "@registerUser"] },
@@ -14,15 +17,16 @@ test.describe("User registration", () => {
       // Arrange:
 
       // Act:
-      
-      await page.getByRole("link", { name: "Register" }).click();
-      await page.getByTestId("firstname-input").fill(userData.firstName);
-      await page.getByTestId("lastname-input").fill(userData.lastName);
-      await page.getByTestId("email-input").fill(userData.notUniqueEmail);
-      await page.getByTestId("birthdate-input").fill(userData.date.toISOString().slice(0, 10));
-      await page.getByRole("button", { name: "Done" }).click();
-      await page.getByTestId("password-input").fill(userData.password);
-      await page.getByTestId("register-button").click();
+      await registerPage.registerLink.click();
+      await registerPage.firstNameInput.fill(userData.firstName);
+      await registerPage.lastNameInput.fill(userData.lastName);
+      await registerPage.emailInput.fill(userData.notUniqueEmail);
+      await registerPage.birthdayInput.fill(
+        userData.date.toISOString().slice(0, 10),
+      );
+      await registerPage.buttonDone.click();
+      await registerPage.passwordInput.fill(userData.password);
+      await registerPage.registerButton.click();
 
       // Assert:
       await expect(page.getByTestId("alert-popup")).toContainText(
@@ -38,12 +42,12 @@ test.describe("User registration", () => {
       // Arrange:
 
       // Act:
-      await page.getByRole("link", { name: "Register" }).click();
-      await page.getByTestId("firstname-input").fill(userData.firstName);
-      await page.getByTestId("lastname-input").fill(userData.lastName);
-      await page.getByTestId("email-input").fill(userData.email);
-      await page.getByTestId("password-input").fill(userData.password);
-      await page.getByTestId("register-button").click();
+      await registerPage.registerLink.click();
+      await registerPage.firstNameInput.fill(userData.firstName);
+      await registerPage.lastNameInput.fill(userData.lastName);
+      await registerPage.emailInput.fill(userData.email);
+      await registerPage.passwordInput.fill(userData.password);
+      await registerPage.registerButton.click();
 
       // Assert:
       await expect(page.getByTestId("alert-popup")).toContainText(
@@ -59,14 +63,16 @@ test.describe("User registration", () => {
       // Arrange:
 
       // Act:
-      await page.getByRole("link", { name: "Register" }).click();
-      await page.getByTestId("firstname-input").fill(userData.firstName);
-      await page.getByTestId("lastname-input").fill(userData.lastName);
-      await page.getByTestId("email-input").fill(userData.notUniqueEmail);
-      await page.getByTestId("birthdate-input").fill(userData.date.toISOString().slice(0, 10));
-      await page.getByRole("button", { name: "Done" }).click();
-      await page.getByTestId("password-input").fill(userData.password);
-      await page.getByTestId("register-button").click();
+      await registerPage.registerLink.click();
+      await registerPage.firstNameInput.fill(userData.firstName);
+      await registerPage.lastNameInput.fill(userData.lastName);
+      await registerPage.emailInput.fill(userData.notUniqueEmail);
+      await registerPage.birthdayInput.fill(
+        userData.date.toISOString().slice(0, 10),
+      );
+      await registerPage.buttonDone.click();
+      await registerPage.passwordInput.fill(userData.password);
+      await registerPage.registerButton.click();
 
       // Assert:
       await expect(page.getByTestId("alert-popup")).toContainText(
@@ -80,14 +86,16 @@ test.describe("User registration", () => {
       // Arrange:
 
       // Act:
-      await page.getByRole("link", { name: "Register" }).click();
-      await page.getByTestId("firstname-input").fill(testCase.firstName);
-      await page.getByTestId("lastname-input").fill(testCase.lastName);
-      await page.getByTestId("email-input").fill(testCase.email);
-      await page.getByTestId("birthdate-input").fill(userData.date.toISOString().slice(0, 10));
-      await page.getByRole("button", { name: "Done" }).click();
-      await page.getByTestId("password-input").fill(testCase.password);
-      await page.getByTestId("register-button").click();
+      await registerPage.registerLink.click();
+      await registerPage.firstNameInput.fill(testCase.firstName);
+      await registerPage.lastNameInput.fill(testCase.lastName);
+      await registerPage.emailInput.fill(testCase.email);
+      await registerPage.birthdayInput.fill(
+        userData.date.toISOString().slice(0, 10),
+      );
+      await registerPage.buttonDone.click();
+      await registerPage.passwordInput.fill(testCase.password);
+      await registerPage.registerButton.click();
 
       // Assert:
       await expect(page.locator(testCase.errorSelector)).toHaveText(
@@ -103,14 +111,16 @@ test.describe("User registration", () => {
       // Arrange:
 
       // Act:
-      await page.getByRole("link", { name: "Register" }).click();
-      await page.getByTestId("firstname-input").fill(userData.firstName);
-      await page.getByTestId("lastname-input").fill(userData.lastName);
-      await page.getByTestId("email-input").fill(userData.email.replace("@", "#"));
-      await page.getByTestId("birthdate-input").fill(userData.date.toISOString().slice(0, 10));
-      await page.getByRole("button", { name: "Done" }).click();
-      await page.getByTestId("password-input").fill(userData.password);
-      await page.getByTestId("register-button").click();
+      await registerPage.registerLink.click();
+      await registerPage.firstNameInput.fill(userData.firstName);
+      await registerPage.lastNameInput.fill(userData.lastName);
+      await registerPage.emailInput.fill(userData.email.replace("@", "#"));
+      await registerPage.birthdayInput.fill(
+        userData.date.toISOString().slice(0, 10),
+      );
+      await registerPage.buttonDone.click();
+      await registerPage.passwordInput.fill(userData.password);
+      await registerPage.registerButton.click();
 
       // Assert:
       await expect(page.locator("#octavalidate_email")).toHaveText(

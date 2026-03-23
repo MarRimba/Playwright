@@ -3,7 +3,10 @@ import { invalidLoginCases, loginUserData } from "./test-data/login.data";
 import { LoginPage } from "../../pages/login.page";
 
 test.describe("User login process", () => {
+  let loginPage: LoginPage;
+
   test.beforeEach(async ({ page }) => {
+    loginPage = new LoginPage(page);
     await page.goto("/");
   });
 
@@ -13,7 +16,6 @@ test.describe("User login process", () => {
     async ({ page }) => {
       // Arrange:
       const expectedElementByTestId = page.getByTestId("hello");
-      const loginPage = new LoginPage(page);
 
       // Act:
       await loginPage.mouseHover.hover();
@@ -37,7 +39,6 @@ test.describe("User login process", () => {
         // Arrange:
         const expectedElementByTestId = page.getByTestId("login-error");
         const expectedPlaceHolder = page.getByPlaceholder("Enter User Email");
-        const loginPage = new LoginPage(page);
 
         // Act:
         await loginPage.mouseHover.hover();
