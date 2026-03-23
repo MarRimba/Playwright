@@ -26,7 +26,6 @@
 |   |-- login.page.ts
 |   `-- register.page.ts
 |-- playwright.config.ts
-|-- README.en.md
 |-- README.md
 |-- tsconfig.json
 `-- tests/
