@@ -64,7 +64,7 @@ test.describe("User login process", () => {
 
   test(
     "User should be logged and logged out correctly",
-    { tag: ["@smoke", "@logout", "@happyPath"]},
+    { tag: ["@smoke", "@logout", "@happyPath"] },
     async ({ page }) => {
       // Arrange:
       const expectedElementByTestId = page.getByTestId("hello");
@@ -84,6 +84,35 @@ test.describe("User login process", () => {
 
       // Assert:
       await expect(page).toHaveURL("/login/");
+    },
+  );
+
+  test(
+    "User should be logged and next account should me deleted",
+    { tag: ["@smoke", "@logout", "@happyPath"] },
+    async ({ page }) => {
+      // Arrange:
+      const expectedElementByTestId = page.getByTestId("hello");
+
+      await loginPage.mouseHover.hover();
+      await loginPage.loginLink.click();
+      await loginPage.loginInput.fill(loginUserData.userCorrectLogin!);
+      await loginPage.passwordInput.fill(loginUserData.userCorrectPassword!);
+      await loginPage.loginButton.click();
+
+      await expect(expectedElementByTestId).toContainText(
+        `Hi ${loginUserData.userCorrectLogin}!`,
+      );
+
+      page.once("dialog", (dialog) => {
+        console.log(`Dialog message: ${dialog.message()}`);
+        dialog.accept().catch(() => {});
+      });
+      await Promise.all([
+        page.waitForURL("**/login/**"),
+        page.getByTestId("deleteButton").click(),
+      ]);
+      await expect(page).toHaveURL(/\/login\/?$/);
     },
   );
 });
