@@ -8,13 +8,19 @@ export default defineConfig({
   reporter: "html",
   use: {
     baseURL: "http://localhost:3000",
-    trace: "on",
+    trace: "on-first-retry",
     // testIdAttribute: 'pw-test'
   },
   projects: [
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
+      testMatch: "tests/users/**/*.spec.ts",
+    },
+    {
+      name: "api",
+      use: {},
+      testMatch: "tests/api/**/*.spec.ts",
     },
   ],
 });

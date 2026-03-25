@@ -10,6 +10,7 @@
     "test:ui": "playwright test --ui",
     "test:login": "playwright test tests/users/login.spec.ts",
     "test:register": "playwright test tests/users/register.spec.ts",
+    "test:api:get-users": "playwright test tests/api/users/get-users.spec.ts --project=api",
     "test:smoke": "playwright test --grep @smoke",
     "report": "playwright show-report",
     "install:browsers": "playwright install"
