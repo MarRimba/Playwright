@@ -7,6 +7,7 @@ export class LoginPage {
   passwordInput: Locator;
   loginButton: Locator;
   logoutButton: Locator;
+  loginError: Locator;
 
   constructor(private page: Page) {
     this.mouseHover = this.page.getByTestId("btn-dropdown");
@@ -18,6 +19,7 @@ export class LoginPage {
       name: "Enter Password",
     });
     this.loginButton = this.page.getByRole("button", { name: "LogIn" });
-    this.logoutButton = this.page.getByTestId("logoutButton")
+    this.logoutButton = this.page.getByTestId("logoutButton");
+    this.loginError = this.page.getByTestId("login-error");
   }
 }

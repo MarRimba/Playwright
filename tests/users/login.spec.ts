@@ -36,10 +36,6 @@ test.describe("User login process", () => {
       testCase.testName,
       { tag: ["@unhappyPath", "@login"] },
       async ({ page }) => {
-        // Arrange:
-        const expectedElementByTestId = page.getByTestId("login-error");
-        const expectedPlaceHolder = page.getByPlaceholder("Enter User Email");
-
         // Act:
         await loginPage.mouseHover.hover();
         await loginPage.loginLink.click();
@@ -48,12 +44,12 @@ test.describe("User login process", () => {
         await loginPage.loginButton.click();
 
         // Assert:
-        await expect(expectedElementByTestId).toContainText(
+        await expect(loginPage.loginError).toContainText(
           "Invalid username or password",
         );
 
         if (testCase.shouldValidatePlaceholder) {
-          await expect(expectedPlaceHolder).toHaveAttribute(
+          await expect(loginPage.loginInput).toHaveAttribute(
             "placeholder",
             "Enter User Email",
           );
@@ -104,14 +100,16 @@ test.describe("User login process", () => {
         `Hi ${loginUserData.userCorrectLogin}!`,
       );
 
+      //Act:
       page.once("dialog", (dialog) => {
-        console.log(`Dialog message: ${dialog.message()}`);
         dialog.accept().catch(() => {});
       });
       await Promise.all([
         page.waitForURL("**/login/**"),
         page.getByTestId("deleteButton").click(),
       ]);
+
+      //Assert:
       await expect(page).toHaveURL(/\/login\/?$/);
     },
   );
