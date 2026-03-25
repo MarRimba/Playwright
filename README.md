@@ -22,28 +22,39 @@
 |-- .gitignore
 |-- package-lock.json
 |-- package.json
-|-- pages/
-|   |-- login.page.ts
-|   `-- register.page.ts
 |-- playwright.config.ts
 |-- README.md
 |-- tsconfig.json
-`-- tests/
-    `-- users/
-        |-- login.spec.ts
-        |-- register.spec.ts
-        `-- test-data/
-            |-- login.data.ts
-            `-- register.data.ts
+|-- pages/
+|   |-- login.page.ts
+|   `-- register.page.ts
+|-- tests/
+|   |-- ui/
+|   |   |-- login.spec.ts
+|   |   |-- register.spec.ts
+|   |   `-- test-data/
+|   |       |-- login.data.ts
+|   |       `-- register.data.ts
+|   `-- api/
+|       `-- users/
+|           `-- get-users.spec.ts
 ```
 
-- `pages/login.page.ts` - page object for login flow
-- `pages/register.page.ts` - page object for registration flow
-- `playwright.config.ts` - Playwright configuration and environment loading
-- `tests/users/login.spec.ts` - login tests
-- `tests/users/register.spec.ts` - registration tests
-- `tests/users/test-data/login.data.ts` - login test data
-- `tests/users/test-data/register.data.ts` - registration test data
+### Directory Descriptions
+
+| Path                                | Purpose                                           |
+| ----------------------------------- | ------------------------------------------------- |
+| `pages/`                            | Page Object Models for UI tests                   |
+| `pages/login.page.ts`               | Page object for login flow                        |
+| `pages/register.page.ts`            | Page object for registration flow                 |
+| `tests/ui/`                         | UI tests for user management flows                |
+| `tests/ui/login.spec.ts`            | Login UI tests                                    |
+| `tests/ui/register.spec.ts`         | Registration UI tests                             |
+| `tests/ui/test-data/`               | Test data for UI tests                            |
+| `tests/api/`                        | API endpoint tests                                |
+| `tests/api/users/`                  | API tests for users endpoints                     |
+| `tests/api/users/get-users.spec.ts` | Tests for GET /users endpoints                    |
+| `playwright.config.ts`              | Playwright configuration with UI and API projects |
 
 ## ✅ Prerequisites
 

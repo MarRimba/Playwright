@@ -15,7 +15,7 @@ export default defineConfig({
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
-      testMatch: "tests/users/**/*.spec.ts",
+      testMatch: "tests/ui/**/*.spec.ts",
     },
     {
       name: "api",
