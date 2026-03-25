@@ -1,9 +1,9 @@
 import { faker } from "@faker-js/faker";
 
 export const userData = {
-  firstName: "John",
-  lastName: "Doe",
-  password: "extremlySecretPassword",
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
+  password: faker.internet.password(),
   email: faker.internet.email(),
   notUniqueEmail: "john.doe@test.com",
   date: faker.date.anytime(),

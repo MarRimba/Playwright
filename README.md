@@ -38,25 +38,31 @@
 |   |           `-- register.data.ts
 |   `-- api/
 |       `-- users/
-|           `-- get-users.spec.ts
+|           |-- get-users.spec.ts
+|           |-- post-user.spec.ts
+|           `-- test-data/
+|               `-- post-user.data.ts
 ```
 
 ### Directory Descriptions
 
-| Path                                | Purpose                                           |
-| ----------------------------------- | ------------------------------------------------- |
-| `pages/`                            | Page Object Models for UI tests                   |
-| `pages/login.page.ts`               | Page object for login flow                        |
-| `pages/register.page.ts`            | Page object for registration flow                 |
-| `tests/ui/`                         | UI tests grouped by domain                        |
-| `tests/ui/users/`                   | User management UI tests                          |
-| `tests/ui/users/login.spec.ts`      | Login UI tests                                    |
-| `tests/ui/users/register.spec.ts`   | Registration UI tests                             |
-| `tests/ui/users/test-data/`         | Test data for user UI tests                       |
-| `tests/api/`                        | API endpoint tests                                |
-| `tests/api/users/`                  | API tests for users endpoints                     |
-| `tests/api/users/get-users.spec.ts` | Tests for GET /users endpoints                    |
-| `playwright.config.ts`              | Playwright configuration with UI and API projects |
+| Path                                          | Purpose                                           |
+| --------------------------------------------- | ------------------------------------------------- |
+| `pages/`                                      | Page Object Models for UI tests                   |
+| `pages/login.page.ts`                         | Page object for login flow                        |
+| `pages/register.page.ts`                      | Page object for registration flow                 |
+| `tests/ui/`                                   | UI tests grouped by domain                        |
+| `tests/ui/users/`                             | User management UI tests                          |
+| `tests/ui/users/login.spec.ts`                | Login UI tests                                    |
+| `tests/ui/users/register.spec.ts`             | Registration UI tests                             |
+| `tests/ui/users/test-data/`                   | Test data for user UI tests                       |
+| `tests/api/`                                  | API endpoint tests                                |
+| `tests/api/users/`                            | API tests for users endpoints                     |
+| `tests/api/users/get-users.spec.ts`           | Tests for GET /users endpoints                    |
+| `tests/api/users/post-user.spec.ts`           | Tests for POST /users endpoint                    |
+| `tests/api/users/test-data/`                  | Test data for API tests                           |
+| `tests/api/users/test-data/post-user.data.ts` | User payloads and validation cases for POST tests |
+| `playwright.config.ts`                        | Playwright configuration with UI and API projects |
 
 ## ✅ Prerequisites
 
