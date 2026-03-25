@@ -2,6 +2,7 @@ import "dotenv/config";
 import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
+  globalSetup: require.resolve('./global-setup'),
   testDir: "./tests",
   fullyParallel: true,
   workers: 1,
