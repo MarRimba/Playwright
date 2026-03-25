@@ -30,11 +30,12 @@
 |   `-- register.page.ts
 |-- tests/
 |   |-- ui/
-|   |   |-- login.spec.ts
-|   |   |-- register.spec.ts
-|   |   `-- test-data/
-|   |       |-- login.data.ts
-|   |       `-- register.data.ts
+|   |   `-- users/
+|   |       |-- login.spec.ts
+|   |       |-- register.spec.ts
+|   |       `-- test-data/
+|   |           |-- login.data.ts
+|   |           `-- register.data.ts
 |   `-- api/
 |       `-- users/
 |           `-- get-users.spec.ts
@@ -47,10 +48,11 @@
 | `pages/`                            | Page Object Models for UI tests                   |
 | `pages/login.page.ts`               | Page object for login flow                        |
 | `pages/register.page.ts`            | Page object for registration flow                 |
-| `tests/ui/`                         | UI tests for user management flows                |
-| `tests/ui/login.spec.ts`            | Login UI tests                                    |
-| `tests/ui/register.spec.ts`         | Registration UI tests                             |
-| `tests/ui/test-data/`               | Test data for UI tests                            |
+| `tests/ui/`                         | UI tests grouped by domain                        |
+| `tests/ui/users/`                   | User management UI tests                          |
+| `tests/ui/users/login.spec.ts`      | Login UI tests                                    |
+| `tests/ui/users/register.spec.ts`   | Registration UI tests                             |
+| `tests/ui/users/test-data/`         | Test data for user UI tests                       |
 | `tests/api/`                        | API endpoint tests                                |
 | `tests/api/users/`                  | API tests for users endpoints                     |
 | `tests/api/users/get-users.spec.ts` | Tests for GET /users endpoints                    |

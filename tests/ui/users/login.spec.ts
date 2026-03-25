@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { invalidLoginCases, loginUserData } from "./test-data/login.data";
-import { LoginPage } from "../../pages/login.page";
+import { LoginPage } from "../../../pages/login.page";
 
 test.describe("User login process", () => {
   let loginPage: LoginPage;
@@ -84,7 +84,7 @@ test.describe("User login process", () => {
   );
 
   test(
-    "User should be logged and next account should me deleted",
+    "User should be logged and next account should be deleted",
     { tag: ["@smoke", "@logout", "@happyPath"] },
     async ({ page }) => {
       // Arrange:
@@ -100,7 +100,7 @@ test.describe("User login process", () => {
         `Hi ${loginUserData.userCorrectLogin}!`,
       );
 
-      //Act:
+      // Act:
       page.once("dialog", (dialog) => {
         dialog.accept().catch(() => {});
       });
@@ -109,7 +109,7 @@ test.describe("User login process", () => {
         page.getByTestId("deleteButton").click(),
       ]);
 
-      //Assert:
+      // Assert:
       await expect(page).toHaveURL(/\/login\/?$/);
     },
   );
