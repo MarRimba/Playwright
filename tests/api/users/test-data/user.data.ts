@@ -1,5 +1,13 @@
 import { faker } from "@faker-js/faker";
 
+export const userIds = {
+    userIdToGet: 1,
+    userIdToDelete: 2,
+    userIdToPatch: 3,
+    userIdToPut: 4,
+    userIdToTestPutComments: 3,
+}
+
 export const userPayload = {
   email: faker.internet.email(),
   firstname: faker.person.firstName(),

@@ -25,7 +25,7 @@ async function globalSetup(config: FullConfig) {
 
   if (fs.existsSync(envPath)) {
     envContent = fs.readFileSync(envPath, "utf-8");
-    envContent = envContent.replace(/BEARER_TOKEN=.*/g, "");
+    envContent = envContent.replace(/^BEARER_TOKEN=.*\n?$/gm, "");
   }
 
   const newEnv = envContent.endsWith("\n")
@@ -35,7 +35,6 @@ async function globalSetup(config: FullConfig) {
   fs.writeFileSync(envPath, newEnv);
 
   process.env.BEARER_TOKEN = token;
-
 }
 
 export default globalSetup;

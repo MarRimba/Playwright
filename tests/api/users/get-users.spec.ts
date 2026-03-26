@@ -1,22 +1,23 @@
 import { expect, test } from "@playwright/test";
+import { userIds } from "./test-data/user.data";
+import { API_ENDPOINTS } from "../endpoints/api-endpoints";
 
-test.describe("GET /users", { tag: ["@smoke", "@users"] }, () => {
-  const usersEndpoint = "/api/users";
+test.describe("GET /users", () => {
+ 
   const expectedStatusCode = 200;
   const minimumUsersCount = 10;
-  const expectedUserId = 4;
 
   type User = {
     id: number;
   };
 
-  test("should return at least 10 users and status code 200", async ({
+  test("should return at least 10 users and status code 200", { tag: ["@smoke", "@users"] }, async ({
     request,
   }) => {
     // Arrange:
 
     // Act:
-    const response = await request.get(usersEndpoint);
+    const response = await request.get(API_ENDPOINTS.USERS);
 
     // Assert:
     expect(
@@ -41,7 +42,7 @@ test.describe("GET /users", { tag: ["@smoke", "@users"] }, () => {
     // Arrange:
 
     // Act:
-    const response = await request.get(`${usersEndpoint}/${expectedUserId}`);
+    const response = await request.get(`${API_ENDPOINTS.USERS}/${userIds.userIdToGet}`);
 
     // Assert:
     expect(
@@ -53,7 +54,7 @@ test.describe("GET /users", { tag: ["@smoke", "@users"] }, () => {
 
     expect(
       responseBody.id,
-      `For id ${expectedUserId} we received: ${JSON.stringify(responseBody)}`,
-    ).toBe(expectedUserId);
+      `For id ${userIds.userIdToGet} we received: ${JSON.stringify(responseBody)}`,
+    ).toBe(userIds.userIdToGet);
   });
 });
