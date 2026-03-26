@@ -39,8 +39,14 @@
 |   |           |-- login.data.ts
 |   |           `-- register.data.ts
 |   `-- api/
+|       |-- config/
+|       |   |-- api-endpoints.ts
+|       |   `-- api-headers.ts
+|       |-- token/
+|       |   `-- token.spec.ts
 |       `-- users/
 |           |-- get-users.spec.ts
+|           |-- patch-user.spec.ts
 |           |-- post-user.spec.ts
 |           `-- test-data/
 |               `-- post-user.data.ts
@@ -61,8 +67,14 @@
 | `tests/ui/users/register.spec.ts`             | Registration UI tests                             |
 | `tests/ui/users/test-data/`                   | Test data for user UI tests                       |
 | `tests/api/`                                  | API endpoint tests                                |
+| `tests/api/config/`                           | API configuration files (endpoints, headers)      |
+| `tests/api/config/api-endpoints.ts`           | Centralized API endpoint definitions              |
+| `tests/api/config/api-headers.ts`             | Centralized API headers (authorization, etc.)     |
+| `tests/api/token/`                            | Token authentication tests                        |
+| `tests/api/token/token.spec.ts`               | Bearer token generation and management tests      |
 | `tests/api/users/`                            | API tests for users endpoints                     |
 | `tests/api/users/get-users.spec.ts`           | Tests for GET /users endpoints                    |
+| `tests/api/users/patch-user.spec.ts`          | Tests for PATCH /users/{id} endpoint              |
 | `tests/api/users/post-user.spec.ts`           | Tests for POST /users endpoint                    |
 | `tests/api/users/test-data/`                  | Test data for API tests                           |
 | `tests/api/users/test-data/post-user.data.ts` | User payloads and validation cases for POST tests |

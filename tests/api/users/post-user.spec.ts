@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { apiRequiredFieldCases, userPayload } from "./test-data/user.data";
-import { API_ENDPOINTS } from "../endpoints/api-endpoints";
+import { API_ENDPOINTS } from "../config/api-endpoints";
 
 test.describe("POST /users", () => {
   const expectedCreatedStatusCode = 201;

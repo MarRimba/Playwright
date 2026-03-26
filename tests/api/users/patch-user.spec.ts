@@ -1,0 +1,39 @@
+import { expect, test } from "@playwright/test";
+import { API_ENDPOINTS } from "../config/api-endpoints";
+import { API_HEADERS } from "../config/api-headers";
+import { userPayload, userIds } from "./test-data/user.data";
+
+test.describe("PATCH /users", () => {
+  const expectedFetchCreatedUserStatusCode = 200;
+
+  const patchUserPayload = {
+    firstname: userPayload.firstname,
+  };
+
+  test.only("user first name should be updated", async ({ request }) => {
+    // Arrange:
+    const responseBeforePatch = await request.get(
+      `${API_ENDPOINTS.USERS}/${userIds.userIdToPatch}`,
+    );
+    const responseBeforePatchBody = await responseBeforePatch.json();
+
+    // Act:
+
+    const response = await request.patch(
+      `${API_ENDPOINTS.USERS}/${userIds.userIdToPatch}`,
+      { headers: API_HEADERS.AUTHORIZED, data: patchUserPayload },
+    );
+
+    // Assert:
+    const updatedUser = await request.get(
+      `${API_ENDPOINTS.USERS}/${userIds.userIdToPatch}`,
+    );
+    const updatedUserBody = await updatedUser.json();
+
+    expect(responseBeforePatchBody.firstname).not.toBe(
+      updatedUserBody.firstname,
+    );
+
+    expect(updatedUser.status()).toEqual(expectedFetchCreatedUserStatusCode);
+  });
+});
