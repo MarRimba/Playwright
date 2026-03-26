@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { apiRequiredFieldCases, userPayload } from "./test-data/post-user.data";
 
-test.describe("POST /users", () => {
+test.describe("POST /users", { tag: ["@users"] }, () => {
   const usersEndpoint = "/api/users";
   const expectedCreatedStatusCode = 201;
   const expectedValidationErrorStatusCode = 422;
@@ -41,7 +41,7 @@ test.describe("POST /users", () => {
   });
 
   for (const apiTestCase of apiRequiredFieldCases) {
-    test(apiTestCase.testName, async ({ request }) => {
+    test(apiTestCase.testName, { tag: ["@users"] }, async ({ request }) => {
       // Arrange:
       const { testName: _testName, ...invalidPayload } = apiTestCase;
 

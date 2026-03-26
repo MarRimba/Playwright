@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test.describe("GET /users", () => {
+test.describe("GET /users", { tag: ["@smoke", "@users"] }, () => {
   const usersEndpoint = "/api/users";
   const expectedStatusCode = 200;
   const minimumUsersCount = 10;
@@ -37,7 +37,7 @@ test.describe("GET /users", () => {
     ).toBeGreaterThanOrEqual(minimumUsersCount);
   });
 
-  test("should return user with given id", async ({ request }) => {
+  test("should return user with given id", { tag: ["@users"] }, async ({ request }) => {
     // Arrange:
 
     // Act:
