@@ -1,130 +1,126 @@
 # Playwright Automated Testing Project
 
-## 🎯 Project Purpose
+Automated UI and API tests written in TypeScript with Playwright.
+The suite targets a local app running at `http://localhost:3000`.
 
-- This repository contains end-to-end tests written in TypeScript using Playwright.
-- The project verifies user login and registration flows.
-- Tests run against an application available at `http://localhost:3000`.
-
-## 🛠️ Technology Stack
+## Stack
 
 - Playwright Test
 - TypeScript
 - Node.js
-- `@faker-js/faker` for test data generation
-- `dotenv` for loading environment variables
+- dotenv
+- @faker-js/faker
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 .
-|-- .env                          # Environment variables (local, ignored in git)
-|-- .env.example                  # Example environment variables template
-|-- .gitignore
-|-- global-setup.ts               # Global setup: authenticates and saves Bearer token
-|-- package-lock.json
-|-- package.json
+|-- .env
+|-- .env.example
+|-- global-setup.ts
+|-- global-teardown.ts
 |-- playwright.config.ts
-|-- README.md
-|-- tsconfig.json
 |-- pages/
 |   |-- login.page.ts
 |   `-- register.page.ts
-|-- tests/
-|   |-- ui/
-|   |   `-- users/
-|   |       |-- login.spec.ts
-|   |       |-- register.spec.ts
-|   |       `-- test-data/
-|   |           |-- login.data.ts
-|   |           `-- register.data.ts
-|   `-- api/
-|       |-- config/
-|       |   |-- api-endpoints.ts
-|       |   `-- api-headers.ts
-|       |-- token/
-|       |   `-- token.spec.ts
-|       `-- users/
-|           |-- get-users.spec.ts
-|           |-- patch-user.spec.ts
-|           |-- post-user.spec.ts
-|           `-- test-data/
-|               `-- post-user.data.ts
+`-- tests/
+    |-- api/
+    |   |-- config/
+    |   |   |-- api-endpoints.ts
+    |   |   `-- api-headers.ts
+    |   |-- token/
+    |   |   `-- token.spec.ts
+    |   `-- users/
+    |       |-- get-users.spec.ts
+    |       |-- patch-user.spec.ts
+    |       |-- post-user.spec.ts
+    |       |-- put-user.spec.ts
+    |       `-- test-data/
+    |           `-- user.data.ts
+    `-- ui/
+        `-- users/
+            |-- login.spec.ts
+            |-- register.spec.ts
+            `-- test-data/
+                |-- login.data.ts
+                `-- register.data.ts
 ```
 
-### Directory Descriptions
-
-| Path                                          | Purpose                                           |
-| --------------------------------------------- | ------------------------------------------------- |
-| `global-setup.ts`                             | Global setup: authenticates user and saves token  |
-| `playwright.config.ts`                        | Playwright configuration with UI and API projects |
-| `pages/`                                      | Page Object Models for UI tests                   |
-| `pages/login.page.ts`                         | Page object for login flow                        |
-| `pages/register.page.ts`                      | Page object for registration flow                 |
-| `tests/ui/`                                   | UI tests grouped by domain                        |
-| `tests/ui/users/`                             | User management UI tests                          |
-| `tests/ui/users/login.spec.ts`                | Login UI tests                                    |
-| `tests/ui/users/register.spec.ts`             | Registration UI tests                             |
-| `tests/ui/users/test-data/`                   | Test data for user UI tests                       |
-| `tests/api/`                                  | API endpoint tests                                |
-| `tests/api/config/`                           | API configuration files (endpoints, headers)      |
-| `tests/api/config/api-endpoints.ts`           | Centralized API endpoint definitions              |
-| `tests/api/config/api-headers.ts`             | Centralized API headers (authorization, etc.)     |
-| `tests/api/token/`                            | Token authentication tests                        |
-| `tests/api/token/token.spec.ts`               | Bearer token generation and management tests      |
-| `tests/api/users/`                            | API tests for users endpoints                     |
-| `tests/api/users/get-users.spec.ts`           | Tests for GET /users endpoints                    |
-| `tests/api/users/patch-user.spec.ts`          | Tests for PATCH /users/{id} endpoint              |
-| `tests/api/users/post-user.spec.ts`           | Tests for POST /users endpoint                    |
-| `tests/api/users/test-data/`                  | Test data for API tests                           |
-| `tests/api/users/test-data/post-user.data.ts` | User payloads and validation cases for POST tests |
-
-## ✅ Prerequisites
+## Prerequisites
 
 - Node.js LTS
 - npm
-- installed Playwright browsers
+- Playwright browsers installed
 - tested application running at `http://localhost:3000`
 
-## 🌐 Tested Application
-
-- Application repository: `https://github.com/jaktestowac/gad-gui-api-demo`
-- Startup command:
-
-```bash
-npm run start
-```
-
-## � Authentication
-
-The project uses Bearer token authentication for API tests:
-
-- **Global Setup**: `global-setup.ts` automatically runs before each test run
-- **Authentication Flow**:
-  1. Logs in with credentials from `.env` (`TEST_USER_EMAIL`, `TEST_USER_PASSWORD`)
-  2. Receives `access_token` from `/api/login`
-  3. Saves token to `.env` (`BEARER_TOKEN`)
-  4. Token is available as `process.env.BEARER_TOKEN` during tests
-
-### Environment Variables
-
-Create a `.env` file based on `.env.example`:
-
-```bash
-# UI Tests Credentials
-LOGIN_EMAIL = your-email@example.com
-LOGIN_PASSWORD = your-password
-
-# API Authentication
-TEST_USER_EMAIL = test-user@example.com
-TEST_USER_PASSWORD = test-password
-BEARER_TOKEN = (auto-populated by global-setup.ts)
-```
-
-**Note**: `.env` is ignored in git (see `.gitignore`) for security.
-
-## �📦 Installation
+## Installation
 
 ```bash
 npm install
 ```
+
+## Environment Variables
+
+Create `.env` based on `.env.example`:
+
+```bash
+# UI credentials
+LOGIN_EMAIL=your-email@example.com
+LOGIN_PASSWORD=your-password
+
+# API auth credentials
+TEST_USER_EMAIL=test-user@example.com
+TEST_USER_PASSWORD=test-password
+
+# populated automatically in global setup
+BEARER_TOKEN=
+```
+
+## Test Lifecycle
+
+- `global-setup.ts`
+  - logs in via `/api/login`
+  - stores `BEARER_TOKEN` in `.env`
+- tests run (UI + API projects)
+- `global-teardown.ts`
+  - restores database state via `/api/restoreDB`
+  - tries `POST`, then falls back to `GET` for compatibility
+
+## Running Tests
+
+Run all tests:
+
+```bash
+npx playwright test
+```
+
+Run API tests only:
+
+```bash
+npx playwright test tests/api --project=api
+```
+
+Run UI tests only:
+
+```bash
+npx playwright test tests/ui --project=chromium
+```
+
+Run by tag examples:
+
+```bash
+npx playwright test --grep @smoke
+npx playwright test --grep @users
+npx playwright test --grep @putUser
+```
+
+Open HTML report:
+
+```bash
+npx playwright show-report
+```
+
+## Tested Application
+
+- repo: `https://github.com/jaktestowac/gad-gui-api-demo`
+- local URL: `http://localhost:3000`
