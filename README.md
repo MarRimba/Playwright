@@ -21,6 +21,7 @@ The suite targets a local app running at `http://localhost:3000`.
 |-- global-teardown.ts
 |-- playwright.config.ts
 |-- pages/
+|   |-- articles.page.ts
 |   |-- login.page.ts
 |   `-- register.page.ts
 `-- tests/
@@ -41,7 +42,9 @@ The suite targets a local app running at `http://localhost:3000`.
     |           `-- user.data.ts
     `-- ui/
         |-- articles/
-        |   `-- post-article.spec.ts
+      |   |-- post-article.spec.ts
+      |   `-- test-data/
+      |       `-- articles.data.ts
         `-- users/
             |-- login.spec.ts
             |-- register.spec.ts
@@ -110,15 +113,21 @@ Run UI tests only:
 npx playwright test tests/ui --project=chromium
 ```
 
+Run article UI tests only:
+
+```bash
+npx playwright test tests/ui/articles --project=chromium
+```
+
 Run by tag examples:
 
 ```bash
 npx playwright test --grep @smoke
 npx playwright test --grep @users
+npx playwright test --grep @articles
 npx playwright test --grep @putUser
 npx playwright test --grep @deleteUser
 npx playwright test --grep @postArticle
-
 ```
 
 Open HTML report:
