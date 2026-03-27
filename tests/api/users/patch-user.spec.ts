@@ -10,30 +10,35 @@ test.describe("PATCH /users", () => {
     firstname: userPayload.firstname,
   };
 
-  test.only("user first name should be updated", async ({ request }) => {
-    // Arrange:
-    const responseBeforePatch = await request.get(
-      `${API_ENDPOINTS.USERS}/${userIds.userIdToPatch}`,
-    );
-    const responseBeforePatchBody = await responseBeforePatch.json();
+  test(
+    "user first name should be updated",
+    { tag: ["@users", "@patchUser"] },
+    async ({ request }) => {
+      // Arrange:
+      const responseBeforePatch = await request.get(
+        `${API_ENDPOINTS.USERS}/${userIds.userIdToPatch}`,
+      );
+      const responseBeforePatchBody = await responseBeforePatch.json();
 
-    // Act:
+      // Act:
 
-    const response = await request.patch(
-      `${API_ENDPOINTS.USERS}/${userIds.userIdToPatch}`,
-      { headers: API_HEADERS.AUTHORIZED, data: patchUserPayload },
-    );
+      const response = await request.patch(
+        `${API_ENDPOINTS.USERS}/${userIds.userIdToPatch}`,
+        { headers: API_HEADERS.AUTHORIZED(), data: patchUserPayload },
+      );
 
-    // Assert:
-    const updatedUser = await request.get(
-      `${API_ENDPOINTS.USERS}/${userIds.userIdToPatch}`,
-    );
-    const updatedUserBody = await updatedUser.json();
+      // Assert:
+      const updatedUser = await request.get(
+        `${API_ENDPOINTS.USERS}/${userIds.userIdToPatch}`,
+      );
+      const updatedUserBody = await updatedUser.json();
 
-    expect(responseBeforePatchBody.firstname).not.toBe(
-      updatedUserBody.firstname,
-    );
+      expect(responseBeforePatchBody.firstname).not.toBe(
+        updatedUserBody.firstname,
+      );
 
-    expect(updatedUser.status()).toEqual(expectedFetchCreatedUserStatusCode);
-  });
+      expect(response.status()).toEqual(expectedFetchCreatedUserStatusCode);
+      expect(updatedUser.status()).toEqual(expectedFetchCreatedUserStatusCode);
+    },
+  );
 });

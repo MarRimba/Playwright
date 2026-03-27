@@ -1,29 +1,34 @@
 import { expect, test } from "@playwright/test";
-import { apiRequiredFieldCases, userPayload } from "./test-data/user.data";
+import {
+  apiPutUserRequiredFieldCases,
+  patchUserPayload,
+  userIds,
+} from "./test-data/user.data";
 import { API_ENDPOINTS } from "../config/api-endpoints";
+import { API_HEADERS } from "../config/api-headers";
 
-test.describe("POST /users", () => {
-  const expectedCreatedStatusCode = 201;
+test.describe("PUT /users/{id}", () => {
   const expectedValidationErrorStatusCode = 422;
   const expectedFetchCreatedUserStatusCode = 200;
   const expectedMaskedValue = "****";
 
   test(
-    "should create valid and unique user",
-    { tag: ["@users", "@postUser"] },
+    "should update all given user data",
+    { tag: ["@users", "@putUser"] },
     async ({ request }) => {
       // Arrange:
 
       // Act:
-      const response = await request.post(API_ENDPOINTS.USERS, {
-        data: userPayload,
-      });
+      const response = await request.put(
+        `${API_ENDPOINTS.USERS}/${userIds.userIdToPut}`,
+        { headers: API_HEADERS.AUTHORIZED(), data: patchUserPayload },
+      );
 
       // Assert:
       expect(
         response.status(),
-        `For POST api/users/ we expect status code ${expectedCreatedStatusCode}`,
-      ).toBe(expectedCreatedStatusCode);
+        `For PUT api/users/{id} we expect status code ${expectedFetchCreatedUserStatusCode}`,
+      ).toBe(expectedFetchCreatedUserStatusCode);
 
       const responseBody = await response.json();
       const responseWithUser = await request.get(
@@ -38,8 +43,8 @@ test.describe("POST /users", () => {
       const createdUser = await responseWithUser.json();
 
       expect(createdUser.id).toBe(responseBody.id);
-      expect(createdUser.firstname).toBe(userPayload.firstname);
-      expect(createdUser.avatar).toBe(userPayload.avatar);
+      expect(createdUser.firstname).toBe(patchUserPayload.firstname);
+      expect(createdUser.avatar).toBe(patchUserPayload.avatar);
       expect(createdUser.email).toBe(expectedMaskedValue);
       expect(createdUser.lastname).toBe(expectedMaskedValue);
       expect(createdUser.password).toBe(expectedMaskedValue);
@@ -47,23 +52,24 @@ test.describe("POST /users", () => {
   );
 
   // Negative test cases
-  for (const apiTestCase of apiRequiredFieldCases) {
+  for (const apiTestCase of apiPutUserRequiredFieldCases) {
     test(
       apiTestCase.testName,
-      { tag: ["@users", "@postUser"] },
+      { tag: ["@users", "@putUser"] },
       async ({ request }) => {
         // Arrange:
         const { testName: _testName, ...invalidPayload } = apiTestCase;
 
         // Act:
-        const response = await request.post(API_ENDPOINTS.USERS, {
-          data: invalidPayload,
-        });
+        const response = await request.put(
+          `${API_ENDPOINTS.USERS}/${userIds.userIdToPut}`,
+          { headers: API_HEADERS.AUTHORIZED(), data: invalidPayload },
+        );
 
         // Assert:
         expect(
           response.status(),
-          `For POST api/users/ we expect status code ${expectedValidationErrorStatusCode}`,
+          `For PUT api/users/{id} we expect status code ${expectedValidationErrorStatusCode}`,
         ).toBe(expectedValidationErrorStatusCode);
       },
     );

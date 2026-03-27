@@ -4,7 +4,7 @@ export const userIds = {
     userIdToGet: 1,
     userIdToDelete: 2,
     userIdToPatch: 4,
-    userIdToPut: 3,
+    userIdToPut: 4,
     userIdToTestPutComments: 3,
 }
 
@@ -13,6 +13,15 @@ export const userPayload = {
   firstname: faker.person.firstName(),
   lastname: faker.person.lastName(),
   password: faker.internet.password(),
+  avatar: faker.image.personPortrait(),
+  id: undefined,
+};
+
+export const patchUserPayload = {
+  email: process.env.TEST_USER_EMAIL,
+  firstname: faker.person.firstName(),
+  lastname: faker.person.lastName(),
+  password: process.env.TEST_USER_PASSWORD,
   avatar: faker.image.personPortrait(),
   id: undefined,
 };
@@ -48,6 +57,33 @@ export const apiRequiredFieldCases = [
     },
         {
         testName: "a new user should not be created due to missing avatar",
+        ...defaultApiRequiredFieldCaseData,
+        avatar: ""
+    }
+]
+
+export const apiPutUserRequiredFieldCases = [
+    {
+        testName: "a given user data should not be updated due to missing first name",
+        ...defaultApiRequiredFieldCaseData,
+        firstname: ""
+    },    {
+        testName: "a given user data should not be updated due to missing last name",
+        ...defaultApiRequiredFieldCaseData,
+        lastname: ""
+    },
+        {
+        testName: "a given user data should not be updated due to missing email",
+        ...defaultApiRequiredFieldCaseData,
+        email: ""
+    },
+        {
+        testName: "a given user data should not be updated due to missing password",
+        ...defaultApiRequiredFieldCaseData,
+        password: ""
+    },
+        {
+        testName: "a given user data should not be updated due to missing avatar",
         ...defaultApiRequiredFieldCaseData,
         avatar: ""
     }

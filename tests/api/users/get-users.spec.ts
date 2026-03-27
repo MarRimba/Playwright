@@ -12,7 +12,7 @@ test.describe("GET /users", () => {
 
   test(
     "should return at least 10 users and status code 200",
-    { tag: ["@smoke", "@users"] },
+    { tag: ["@smoke", "@users", "@getUsers"] },
     async ({ request }) => {
       // Arrange:
 
@@ -41,7 +41,7 @@ test.describe("GET /users", () => {
 
   test(
     "should return user with given id",
-    { tag: ["@users"] },
+    { tag: ["@users", "@getUsers"] },
     async ({ request }) => {
       // Arrange:
 
