@@ -3,8 +3,6 @@ import { API_ENDPOINTS } from "../config/api-endpoints";
 import { API_STATUS_CODES } from "../config/api-status-codes";
 
 test.describe("GET /users", () => {
-  const minimumUsersCount = 10;
-
   type User = {
     id: number;
   };
@@ -17,13 +15,14 @@ test.describe("GET /users", () => {
   });
 
   test(
-    "should return at least 10 users and status code 200",
+    "should return all users from database",
     { tag: ["@smoke", "@users", "@getUsers"] },
     async ({ request }) => {
       // Arrange:
 
       // Act:
       const response = await request.get(API_ENDPOINTS.USERS);
+      const responseBody = (await response.json()) as User[];
 
       // Assert:
       expect(
@@ -32,14 +31,9 @@ test.describe("GET /users", () => {
       ).toBe(API_STATUS_CODES.OK);
 
       expect(
-        Array.isArray(allUsers),
-        "GET /users should return an array of users",
-      ).toBe(true);
-
-      expect(
-        allUsers.length,
-        `We expect number of users to be at least ${minimumUsersCount}`,
-      ).toBeGreaterThanOrEqual(minimumUsersCount);
+        responseBody.length,
+        `Expected all ${allUsers.length} users, received: ${responseBody.length}`,
+      ).toBe(allUsers.length);
     },
   );
 

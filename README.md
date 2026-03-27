@@ -27,10 +27,12 @@ The suite targets a local app running at `http://localhost:3000`.
     |-- api/
     |   |-- config/
     |   |   |-- api-endpoints.ts
-    |   |   `-- api-headers.ts
+    |   |   |-- api-headers.ts
+    |   |   `-- api-status-codes.ts
     |   |-- token/
     |   |   `-- token.spec.ts
     |   `-- users/
+    |       |-- delete-user.spec.ts
     |       |-- get-users.spec.ts
     |       |-- patch-user.spec.ts
     |       |-- post-user.spec.ts
@@ -38,6 +40,8 @@ The suite targets a local app running at `http://localhost:3000`.
     |       `-- test-data/
     |           `-- user.data.ts
     `-- ui/
+        |-- articles/
+        |   `-- post-article.spec.ts
         `-- users/
             |-- login.spec.ts
             |-- register.spec.ts
@@ -112,6 +116,9 @@ Run by tag examples:
 npx playwright test --grep @smoke
 npx playwright test --grep @users
 npx playwright test --grep @putUser
+npx playwright test --grep @deleteUser
+npx playwright test --grep @postArticle
+
 ```
 
 Open HTML report:
