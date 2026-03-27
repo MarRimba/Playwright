@@ -1,11 +1,10 @@
 import { expect, test } from "@playwright/test";
 import { API_ENDPOINTS } from "../config/api-endpoints";
 import { API_HEADERS } from "../config/api-headers";
+import { API_STATUS_CODES } from "../config/api-status-codes";
 import { userPayload, userIds } from "./test-data/user.data";
 
 test.describe("PATCH /users", () => {
-  const expectedFetchCreatedUserStatusCode = 200;
-
   const patchUserPayload = {
     firstname: userPayload.firstname,
   };
@@ -37,8 +36,8 @@ test.describe("PATCH /users", () => {
         updatedUserBody.firstname,
       );
 
-      expect(response.status()).toEqual(expectedFetchCreatedUserStatusCode);
-      expect(updatedUser.status()).toEqual(expectedFetchCreatedUserStatusCode);
+      expect(response.status()).toEqual(API_STATUS_CODES.OK);
+      expect(updatedUser.status()).toEqual(API_STATUS_CODES.OK);
     },
   );
 });

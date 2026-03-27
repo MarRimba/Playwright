@@ -1,11 +1,9 @@
 import { expect, test } from "@playwright/test";
 import { apiRequiredFieldCases, userPayload } from "./test-data/user.data";
 import { API_ENDPOINTS } from "../config/api-endpoints";
+import { API_STATUS_CODES } from "../config/api-status-codes";
 
 test.describe("POST /users", () => {
-  const expectedCreatedStatusCode = 201;
-  const expectedValidationErrorStatusCode = 422;
-  const expectedFetchCreatedUserStatusCode = 200;
   const expectedMaskedValue = "****";
 
   test(
@@ -22,8 +20,8 @@ test.describe("POST /users", () => {
       // Assert:
       expect(
         response.status(),
-        `For POST api/users/ we expect status code ${expectedCreatedStatusCode}`,
-      ).toBe(expectedCreatedStatusCode);
+        `For POST api/users/ we expect status code ${API_STATUS_CODES.CREATED}`,
+      ).toBe(API_STATUS_CODES.CREATED);
 
       const responseBody = await response.json();
       const responseWithUser = await request.get(
@@ -32,8 +30,8 @@ test.describe("POST /users", () => {
 
       expect(
         responseWithUser.status(),
-        `For GET api/users/{id} we expect status code ${expectedFetchCreatedUserStatusCode}`,
-      ).toBe(expectedFetchCreatedUserStatusCode);
+        `For GET api/users/{id} we expect status code ${API_STATUS_CODES.OK}`,
+      ).toBe(API_STATUS_CODES.OK);
 
       const createdUser = await responseWithUser.json();
 
@@ -63,8 +61,8 @@ test.describe("POST /users", () => {
         // Assert:
         expect(
           response.status(),
-          `For POST api/users/ we expect status code ${expectedValidationErrorStatusCode}`,
-        ).toBe(expectedValidationErrorStatusCode);
+          `For POST api/users/ we expect status code ${API_STATUS_CODES.UNPROCESSABLE_ENTITY}`,
+        ).toBe(API_STATUS_CODES.UNPROCESSABLE_ENTITY);
       },
     );
   }

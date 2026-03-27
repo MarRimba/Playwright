@@ -6,10 +6,9 @@ import {
 } from "./test-data/user.data";
 import { API_ENDPOINTS } from "../config/api-endpoints";
 import { API_HEADERS } from "../config/api-headers";
+import { API_STATUS_CODES } from "../config/api-status-codes";
 
 test.describe("PUT /users/{id}", () => {
-  const expectedValidationErrorStatusCode = 422;
-  const expectedFetchCreatedUserStatusCode = 200;
   const expectedMaskedValue = "****";
 
   test(
@@ -27,8 +26,8 @@ test.describe("PUT /users/{id}", () => {
       // Assert:
       expect(
         response.status(),
-        `For PUT api/users/{id} we expect status code ${expectedFetchCreatedUserStatusCode}`,
-      ).toBe(expectedFetchCreatedUserStatusCode);
+        `For PUT api/users/{id} we expect status code ${API_STATUS_CODES.OK}`,
+      ).toBe(API_STATUS_CODES.OK);
 
       const responseBody = await response.json();
       const responseWithUser = await request.get(
@@ -37,8 +36,8 @@ test.describe("PUT /users/{id}", () => {
 
       expect(
         responseWithUser.status(),
-        `For GET api/users/{id} we expect status code ${expectedFetchCreatedUserStatusCode}`,
-      ).toBe(expectedFetchCreatedUserStatusCode);
+        `For GET api/users/{id} we expect status code ${API_STATUS_CODES.OK}`,
+      ).toBe(API_STATUS_CODES.OK);
 
       const createdUser = await responseWithUser.json();
 
@@ -69,8 +68,8 @@ test.describe("PUT /users/{id}", () => {
         // Assert:
         expect(
           response.status(),
-          `For PUT api/users/{id} we expect status code ${expectedValidationErrorStatusCode}`,
-        ).toBe(expectedValidationErrorStatusCode);
+          `For PUT api/users/{id} we expect status code ${API_STATUS_CODES.UNPROCESSABLE_ENTITY}`,
+        ).toBe(API_STATUS_CODES.UNPROCESSABLE_ENTITY);
       },
     );
   }

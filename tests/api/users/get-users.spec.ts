@@ -1,9 +1,9 @@
 import { expect, test } from "@playwright/test";
 import { userIds } from "./test-data/user.data";
 import { API_ENDPOINTS } from "../config/api-endpoints";
+import { API_STATUS_CODES } from "../config/api-status-codes";
 
 test.describe("GET /users", () => {
-  const expectedStatusCode = 200;
   const minimumUsersCount = 10;
 
   type User = {
@@ -22,8 +22,8 @@ test.describe("GET /users", () => {
       // Assert:
       expect(
         response.status(),
-        `For GET /users we expect status code: ${expectedStatusCode}`,
-      ).toBe(expectedStatusCode);
+        `For GET /users we expect status code: ${API_STATUS_CODES.OK}`,
+      ).toBe(API_STATUS_CODES.OK);
 
       const responseBody = (await response.json()) as User[];
 
@@ -53,8 +53,8 @@ test.describe("GET /users", () => {
       // Assert:
       expect(
         response.status(),
-        `For GET /users/{id} we expect status code ${expectedStatusCode}`,
-      ).toBe(expectedStatusCode);
+        `For GET /users/{id} we expect status code ${API_STATUS_CODES.OK}`,
+      ).toBe(API_STATUS_CODES.OK);
 
       const responseBody = (await response.json()) as User;
 
