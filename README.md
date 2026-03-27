@@ -42,9 +42,9 @@ The suite targets a local app running at `http://localhost:3000`.
     |           `-- user.data.ts
     `-- ui/
         |-- articles/
-      |   |-- post-article.spec.ts
-      |   `-- test-data/
-      |       `-- articles.data.ts
+        |   |-- post-article.spec.ts
+        |   `-- test-data/
+        |       `-- articles.data.ts
         `-- users/
             |-- login.spec.ts
             |-- register.spec.ts
