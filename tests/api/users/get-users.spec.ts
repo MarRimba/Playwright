@@ -1,5 +1,4 @@
 import { expect, test } from "@playwright/test";
-import { userIds } from "./test-data/user.data";
 import { API_ENDPOINTS } from "../config/api-endpoints";
 import { API_STATUS_CODES } from "../config/api-status-codes";
 
@@ -9,6 +8,13 @@ test.describe("GET /users", () => {
   type User = {
     id: number;
   };
+
+  let allUsers: User[] = [];
+
+  test.beforeAll(async ({ request }) => {
+    const response = await request.get(API_ENDPOINTS.USERS);
+    allUsers = (await response.json()) as User[];
+  });
 
   test(
     "should return at least 10 users and status code 200",
@@ -25,43 +31,42 @@ test.describe("GET /users", () => {
         `For GET /users we expect status code: ${API_STATUS_CODES.OK}`,
       ).toBe(API_STATUS_CODES.OK);
 
-      const responseBody = (await response.json()) as User[];
-
       expect(
-        Array.isArray(responseBody),
+        Array.isArray(allUsers),
         "GET /users should return an array of users",
       ).toBe(true);
 
       expect(
-        responseBody.length,
+        allUsers.length,
         `We expect number of users to be at least ${minimumUsersCount}`,
       ).toBeGreaterThanOrEqual(minimumUsersCount);
     },
   );
 
   test(
-    "should return user with given id",
+    "should return randomly selected user from users list",
     { tag: ["@users", "@getUsers"] },
     async ({ request }) => {
       // Arrange:
+      const randomUser = allUsers[Math.floor(Math.random() * allUsers.length)];
 
       // Act:
       const response = await request.get(
-        `${API_ENDPOINTS.USERS}/${userIds.userIdToGet}`,
+        `${API_ENDPOINTS.USERS}/${randomUser.id}`,
       );
 
       // Assert:
       expect(
         response.status(),
-        `For GET /users/{id} we expect status code ${API_STATUS_CODES.OK}`,
+        `For GET /users/${randomUser.id} we expect status code ${API_STATUS_CODES.OK}`,
       ).toBe(API_STATUS_CODES.OK);
 
       const responseBody = (await response.json()) as User;
 
       expect(
         responseBody.id,
-        `For id ${userIds.userIdToGet} we received: ${JSON.stringify(responseBody)}`,
-      ).toBe(userIds.userIdToGet);
+        `Expected id ${randomUser.id}, received: ${JSON.stringify(responseBody)}`,
+      ).toBe(randomUser.id);
     },
   );
 });
