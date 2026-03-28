@@ -95,46 +95,23 @@ BEARER_TOKEN=
 
 ## Running Tests
 
-Run all tests:
+Quick start:
 
 ```bash
+# Run all tests
 npx playwright test
-```
 
-Run API tests only:
-
-```bash
+# Run API tests only
 npx playwright test tests/api --project=api
-```
 
-Run UI tests only:
-
-```bash
+# Run UI tests only
 npx playwright test tests/ui --project=chromium
-```
 
-Run article UI tests only:
-
-```bash
-npx playwright test tests/ui/articles --project=chromium
-```
-
-Run by tag examples:
-
-```bash
-npx playwright test --grep @smoke
-npx playwright test --grep @users
-npx playwright test --grep @articles
-npx playwright test --grep @putUser
-npx playwright test --grep @deleteUser
-npx playwright test --grep @postArticle
-```
-
-Open HTML report:
-
-```bash
+# Open HTML report
 npx playwright show-report
 ```
+
+For complete list of commands and more options, see [Test Suite Documentation](TESTS.md).
 
 ## Tested Application
 
