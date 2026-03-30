@@ -1,49 +1,49 @@
-# Test Suite Documentation
+# 📋 Test Suite Documentation
 
 Complete overview of automated tests organized by module and functionality. Tests are written in TypeScript with Playwright and follow AAA pattern (Arrange, Act, Assert).
 
-## Test Categories
+## 📊 Test Categories
 
-### API Tests
+### 🔗 API Tests
 
 API tests verify backend functionality through HTTP requests. All requests include proper headers and authorization where required.
 
-#### Authentication
+#### 🔑 Authentication
 
 | Test                            | File                            | Purpose                                                                                    |
 | ------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------ |
 | Verify generated token is valid | `tests/api/token/token.spec.ts` | Validates that the generated BEARER_TOKEN from global setup is active and accepts requests |
 
-#### Users Management
+#### 👥 Users Management
 
-**GET Operations**
+**📥 GET Operations**
 
 | Test                                          | File                                | Purpose                                                     |
 | --------------------------------------------- | ----------------------------------- | ----------------------------------------------------------- |
 | Return all users from database                | `tests/api/users/get-users.spec.ts` | Fetches complete user list and validates response structure |
 | Return randomly selected user from users list | `tests/api/users/get-users.spec.ts` | Retrieves specific user by ID and verifies correct data     |
 
-**POST Operations**
+**➕ POST Operations**
 
 | Test                              | File                                | Purpose                                                                 |
 | --------------------------------- | ----------------------------------- | ----------------------------------------------------------------------- |
 | Create valid and unique user      | `tests/api/users/post-user.spec.ts` | Creates new user with valid payload and verifies creation               |
 | POST validations (negative cases) | `tests/api/users/post-user.spec.ts` | Validates required fields: firstname, lastname, email, avatar, password |
 
-**PUT Operations**
+**🔄 PUT Operations**
 
 | Test                             | File                               | Purpose                                                  |
 | -------------------------------- | ---------------------------------- | -------------------------------------------------------- |
 | Update all given user data       | `tests/api/users/put-user.spec.ts` | Performs full user record update and verifies all fields |
 | PUT validations (negative cases) | `tests/api/users/put-user.spec.ts` | Validates required fields during full updates            |
 
-**PATCH Operations**
+**🛠️ PATCH Operations**
 
 | Test                              | File                                 | Purpose                                                           |
 | --------------------------------- | ------------------------------------ | ----------------------------------------------------------------- |
 | User first name should be updated | `tests/api/users/patch-user.spec.ts` | Updates specific field (firstname) and verifies change is applied |
 
-**DELETE Operations**
+**🗑️ DELETE Operations**
 
 | Test                                       | File                                  | Purpose                                                                        |
 | ------------------------------------------ | ------------------------------------- | ------------------------------------------------------------------------------ |
@@ -51,13 +51,13 @@ API tests verify backend functionality through HTTP requests. All requests inclu
 
 ---
 
-### UI Tests
+### 🎨 UI Tests
 
 UI tests verify user-facing functionality through browser interactions. Tests execute in Chromium browser with tracing enabled.
 
-#### Users - Authentication & Account Management
+#### 👤 Users - Authentication & Account Management
 
-**Login Functionality**
+**🔓 Login Functionality**
 
 | Test                                                     | File                           | Purpose                                                               |
 | -------------------------------------------------------- | ------------------------------ | --------------------------------------------------------------------- |
@@ -66,7 +66,7 @@ UI tests verify user-facing functionality through browser interactions. Tests ex
 | User should be logged and logged out correctly           | `tests/ui/users/login.spec.ts` | Logs in, validates session, logs out, verifies redirect to login page |
 | User should be logged and next account should be deleted | `tests/ui/users/login.spec.ts` | Completes login flow and deletes account via UI dialog                |
 
-**Registration Functionality**
+**📝 Registration Functionality**
 
 | Test                                                    | File                              | Purpose                                                                         |
 | ------------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------- |
@@ -75,17 +75,18 @@ UI tests verify user-facing functionality through browser interactions. Tests ex
 | A new user should not be created due to not unique mail | `tests/ui/users/register.spec.ts` | Attempts registration with duplicate email and verifies error message           |
 | Registration field validations (multiple cases)         | `tests/ui/users/register.spec.ts` | Tests various missing required fields: first name, last name, email, password   |
 
-#### Content Management
+#### 📰 Content Management
 
-**Articles**
+**📄 Articles**
 
-| Test                               | File                                     | Purpose                                                                                |
-| ---------------------------------- | ---------------------------------------- | -------------------------------------------------------------------------------------- |
-| Should add article with valid data | `tests/ui/articles/post-article.spec.ts` | Creates article after login: fills title, body, selects image, saves, verifies success |
+| Test                               | File                                      | Purpose                                                                                                             |
+| ---------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Should display a list of articles  | `tests/ui/articles/list-articles.spec.ts` | Navigates to articles section, opens first article, goes to page 2, clicks second article, verifies it is displayed |
+| Should add article with valid data | `tests/ui/articles/post-article.spec.ts`  | Creates article after login: fills title, body, selects image, saves, verifies success                              |
 
 ---
 
-## Test Data
+## 💾 Test Data
 
 Test data files provide fixtures and reusable payloads:
 

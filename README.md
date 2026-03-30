@@ -1,17 +1,17 @@
-# Playwright Automated Testing Project
+# 🎭 Playwright Automated Testing Project
 
 Automated UI and API tests written in TypeScript with Playwright.
 The suite targets a local app running at `http://localhost:3000`.
 
-## Stack
+## 📚 Stack
 
-- Playwright Test
-- TypeScript
-- Node.js
-- dotenv
-- @faker-js/faker
+- 🎭 Playwright Test
+- 🔷 TypeScript
+- 💚 Node.js
+- 📝 dotenv
+- 🔀 @faker-js/faker
 
-## Project Structure
+## 🗂️ Project Structure
 
 ```text
 .
@@ -42,6 +42,7 @@ The suite targets a local app running at `http://localhost:3000`.
     |           `-- user.data.ts
     `-- ui/
         |-- articles/
+        |   |-- list-articles.spec.ts
         |   |-- post-article.spec.ts
         |   `-- test-data/
         |       `-- articles.data.ts
@@ -53,20 +54,20 @@ The suite targets a local app running at `http://localhost:3000`.
                 `-- register.data.ts
 ```
 
-## Prerequisites
+## ✅ Prerequisites
 
 - Node.js LTS
 - npm
 - Playwright browsers installed
 - tested application running at `http://localhost:3000`
 
-## Installation
+## 📦 Installation
 
 ```bash
 npm install
 ```
 
-## Environment Variables
+## 🔐 Environment Variables
 
 Create `.env` based on `.env.example`:
 
@@ -83,7 +84,7 @@ TEST_USER_PASSWORD=test-password
 BEARER_TOKEN=
 ```
 
-## Test Lifecycle
+## ⏳ Test Lifecycle
 
 - `global-setup.ts`
   - logs in via `/api/login`
@@ -93,7 +94,7 @@ BEARER_TOKEN=
   - restores database state via `/api/restoreDB`
   - tries `POST`, then falls back to `GET` for compatibility
 
-## Running Tests
+## ▶️ Running Tests
 
 Quick start:
 
