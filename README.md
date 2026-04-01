@@ -34,7 +34,10 @@ The suite targets a local app running at `http://localhost:3000`.
 `-- tests/
     |-- api/
     |   |-- articles/
-    |   |   `-- get-articles.spec.ts
+    |   |   |-- get-articles.spec.ts
+    |   |   |-- post-article.spec.ts
+    |   |   `-- test-data/
+    |   |       `-- article.data.ts
     |   |-- token/
     |   |   `-- token.spec.ts
     |   `-- users/

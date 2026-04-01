@@ -58,6 +58,14 @@ API tests verify backend functionality through HTTP requests. Requests use share
 | Return list of articles                             | `tests/api/articles/get-articles.spec.ts` | Fetches article list and validates response shape                 |
 | Return randomly selected article from articles list | `tests/api/articles/get-articles.spec.ts` | Retrieves a specific article by ID selected from the current list |
 
+**➕ POST operations**
+
+| Test                                      | File                                      | Purpose                                                               |
+| ----------------------------------------- | ----------------------------------------- | --------------------------------------------------------------------- |
+| Create valid and unique article           | `tests/api/articles/post-article.spec.ts` | Creates article with valid payload and verifies creation with ID      |
+| POST article validations (multiple cases) | `tests/api/articles/post-article.spec.ts` | Tests missing required fields: title, body, date - expects 422 status |
+| Should create article without image       | `tests/api/articles/post-article.spec.ts` | Creates article without optional image field, expects 201 status      |
+
 ### 🎨 UI Tests
 
 UI tests verify user-facing functionality through browser interactions. Tests run in the `chromium` project with tracing enabled on first retry.
@@ -103,6 +111,7 @@ Test data files provide fixtures and reusable payloads:
 | User registration test data              | `tests/ui/users/test-data/register.data.ts`    |
 | Article payload, test user credentials   | `tests/ui/articles/test-data/articles.data.ts` |
 | API user payloads and test IDs           | `tests/api/users/test-data/user.data.ts`       |
+| API article payloads and validations     | `tests/api/articles/test-data/article.data.ts` |
 
 ## ⚙️ Configuration Files
 
