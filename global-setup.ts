@@ -15,6 +15,7 @@ async function globalSetup(config: FullConfig) {
 
   if (!response.ok()) {
     console.error("❌ Login failed:", response.status(), await response.text());
+    await context.dispose();
     throw new Error(`Login failed with status ${response.status()}`);
   }
 
@@ -36,6 +37,7 @@ async function globalSetup(config: FullConfig) {
   fs.writeFileSync(envPath, newEnv);
 
   process.env.BEARER_TOKEN = token;
+  await context.dispose();
 }
 
 export default globalSetup;
