@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { invalidLoginCases, loginUserData } from "./test-data/login.data";
 import { LoginPage } from "../../../pages/login.page";
+import { TAG, tags } from "../../config/test-tags";
 
 test.describe("User login process", () => {
   let loginPage: LoginPage;
@@ -12,7 +13,7 @@ test.describe("User login process", () => {
 
   test(
     "User should be logged with correct credentials",
-    { tag: ["@smoke", "@login"] },
+    { tag: tags(TAG.UI, TAG.SMOKE, TAG.USERS, TAG.LOGIN) },
     async ({ page }) => {
       // Arrange:
       const expectedElementByTestId = page.getByTestId("hello");
@@ -34,7 +35,7 @@ test.describe("User login process", () => {
   for (const testCase of invalidLoginCases) {
     test(
       testCase.testName,
-      { tag: ["@unhappyPath", "@login"] },
+      { tag: tags(TAG.UI, TAG.USERS, TAG.LOGIN, TAG.UNHAPPY_PATH) },
       async ({ page }) => {
         // Act:
         await loginPage.mouseHover.hover();
@@ -60,7 +61,7 @@ test.describe("User login process", () => {
 
   test(
     "User should be logged and logged out correctly",
-    { tag: ["@smoke", "@logout", "@happyPath"] },
+    { tag: tags(TAG.UI, TAG.SMOKE, TAG.USERS, TAG.LOGOUT) },
     async ({ page }) => {
       // Arrange:
       const expectedElementByTestId = page.getByTestId("hello");
@@ -85,7 +86,7 @@ test.describe("User login process", () => {
 
   test(
     "User should be logged and next account should be deleted",
-    { tag: ["@smoke", "@logout", "@happyPath"] },
+    { tag: tags(TAG.UI, TAG.USERS, TAG.DELETE_USER) },
     async ({ page }) => {
       // Arrange:
       const expectedElementByTestId = page.getByTestId("hello");

@@ -1,10 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { API_ENDPOINTS } from "../config/api-endpoints";
+import { TAG, tags } from "../../config/test-tags";
 
 test.describe("GET /login", () => {
   test(
     "should verify generated token is valid",
-    { tag: ["@auth"] },
+    { tag: tags(TAG.API, TAG.AUTH, TAG.TOKEN) },
     async ({ request }) => {
       const token = process.env.BEARER_TOKEN;
 

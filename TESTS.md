@@ -106,7 +106,7 @@ Test data files provide fixtures and reusable payloads:
 
 ## Running Tests
 
-Comprehensive command reference:
+Full command reference:
 
 ```bash
 # All tests
@@ -117,6 +117,8 @@ npx playwright test
 npm run test:headed
 npm run test:debug
 npm run test:ui
+npm run test:login
+npm run test:register
 npm run test:api:get-users
 npm run test:smoke
 npm run report
@@ -125,18 +127,27 @@ npm run install:browsers
 # Projects
 npx playwright test --project=chromium
 npx playwright test --project=api
+npx playwright test tests/ui --project=chromium
+npx playwright test tests/api --project=api
 
 # Specific scope
 npx playwright test tests/api/articles/
 npx playwright test tests/api/users/
+npx playwright test tests/ui/users/
 npx playwright test tests/ui/articles/
 npx playwright test tests/api/articles/get-articles.spec.ts --project=api
+npx playwright test tests/api/users/get-users.spec.ts --project=api
 npx playwright test tests/api/users/post-user.spec.ts
+npx playwright test tests/ui/users/login.spec.ts --project=chromium
+npx playwright test tests/ui/users/register.spec.ts --project=chromium
 npx playwright test tests/ui/articles/delete-article.spec.ts --project=chromium
 
 # Filter tests
 npx playwright test --grep "should create"
 npx playwright test --grep @smoke
+npx playwright test --grep @api
+npx playwright test --grep @ui
+npx playwright test --grep "@users.*@login|@login.*@users"
 
 # Execution modes
 npx playwright test --headed              # visible browser

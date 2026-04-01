@@ -2,11 +2,12 @@ import { expect, test } from "@playwright/test";
 import { API_ENDPOINTS } from "../config/api-endpoints";
 import { API_STATUS_CODES } from "../config/api-status-codes";
 import { userPayload } from "./test-data/user.data";
+import { TAG, tags } from "../../config/test-tags";
 
 test.describe("DELETE /users", () => {
   test(
     "should create new and unique user for delete test",
-    { tag: ["@users", "@deleteUser"] },
+    { tag: tags(TAG.API, TAG.USERS, TAG.DELETE_USER) },
     async ({ request }) => {
       // Arrange:
       const createdUser = await request.post(API_ENDPOINTS.USERS, {

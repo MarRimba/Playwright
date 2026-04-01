@@ -3,6 +3,7 @@ import { LoginPage } from "../../../pages/login.page";
 import { ArticlesPage } from "../../../pages/articles.page";
 import { articlePayload } from "./test-data/articles.data";
 import { loginUserData } from "./test-data/articles.data";
+import { TAG, tags } from "../../config/test-tags";
 
 test.describe("Delete article", () => {
   let loginPage: LoginPage;
@@ -21,7 +22,7 @@ test.describe("Delete article", () => {
 
   test(
     "should delete article",
-    { tag: ["@articles", "@deleteArticle"] },
+    { tag: tags(TAG.UI, TAG.ARTICLES, TAG.DELETE_ARTICLE) },
     async ({ page }) => {
       // Arrange:
 

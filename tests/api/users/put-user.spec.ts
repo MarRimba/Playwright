@@ -7,13 +7,14 @@ import {
 import { API_ENDPOINTS } from "../config/api-endpoints";
 import { API_HEADERS } from "../config/api-headers";
 import { API_STATUS_CODES } from "../config/api-status-codes";
+import { TAG, tags } from "../../config/test-tags";
 
 test.describe("PUT /users/{id}", () => {
   const expectedMaskedValue = "****";
 
   test(
     "should update all given user data",
-    { tag: ["@users", "@putUser"] },
+    { tag: tags(TAG.API, TAG.USERS, TAG.PUT_USER) },
     async ({ request }) => {
       // Arrange:
 
@@ -54,7 +55,7 @@ test.describe("PUT /users/{id}", () => {
   for (const apiTestCase of apiPutUserRequiredFieldCases) {
     test(
       apiTestCase.testName,
-      { tag: ["@users", "@putUser"] },
+      { tag: tags(TAG.API, TAG.USERS, TAG.PUT_USER) },
       async ({ request }) => {
         // Arrange:
         const { testName: _testName, ...invalidPayload } = apiTestCase;

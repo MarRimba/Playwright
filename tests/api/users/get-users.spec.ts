@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { API_ENDPOINTS } from "../config/api-endpoints";
 import { API_STATUS_CODES } from "../config/api-status-codes";
+import { TAG, tags } from "../../config/test-tags";
 
 test.describe("GET /users", () => {
   type User = {
@@ -9,7 +10,7 @@ test.describe("GET /users", () => {
 
   test(
     "should return all users from database",
-    { tag: ["@smoke", "@users", "@getUsers"] },
+    { tag: tags(TAG.API, TAG.SMOKE, TAG.USERS, TAG.GET_USERS) },
     async ({ request }) => {
       // Arrange:
 
@@ -36,7 +37,7 @@ test.describe("GET /users", () => {
 
   test(
     "should return randomly selected user from users list",
-    { tag: ["@users", "@getUsers"] },
+    { tag: tags(TAG.API, TAG.USERS, TAG.GET_USERS) },
     async ({ request }) => {
       // Arrange:
       const usersResponse = await request.get(API_ENDPOINTS.USERS);

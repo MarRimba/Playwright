@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { LoginPage } from "../../../pages/login.page";
 import { ArticlesPage } from "../../../pages/articles.page";
 import { testUserData } from "./test-data/articles.data";
+import { TAG, tags } from "../../config/test-tags";
 
 test.describe("Update article", () => {
   let loginPage: LoginPage;
@@ -20,7 +21,7 @@ test.describe("Update article", () => {
 
   test(
     "should update article title with valid data",
-    { tag: ["@articles", "@updateArticle"] },
+    { tag: tags(TAG.UI, TAG.ARTICLES, TAG.UPDATE_ARTICLE) },
     async ({ page }) => {
       // Arrange:
 

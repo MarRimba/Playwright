@@ -3,6 +3,7 @@ import { LoginPage } from "../../../pages/login.page";
 import { ArticlesPage } from "../../../pages/articles.page";
 import { loginUserData } from "../users/test-data/login.data";
 import { articlePayload } from "./test-data/articles.data";
+import { TAG, tags } from "../../config/test-tags";
 
 test.describe("Add article", () => {
   let loginPage: LoginPage;
@@ -21,7 +22,7 @@ test.describe("Add article", () => {
 
   test(
     "should add article with valid data",
-    { tag: ["@articles", "@postArticle"] },
+    { tag: tags(TAG.UI, TAG.ARTICLES, TAG.POST_ARTICLE) },
     async ({ page }) => {
       // Arrange:
 

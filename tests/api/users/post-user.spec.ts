@@ -2,13 +2,14 @@ import { expect, test } from "@playwright/test";
 import { apiRequiredFieldCases, userPayload } from "./test-data/user.data";
 import { API_ENDPOINTS } from "../config/api-endpoints";
 import { API_STATUS_CODES } from "../config/api-status-codes";
+import { TAG, tags } from "../../config/test-tags";
 
 test.describe("POST /users", () => {
   const expectedMaskedValue = "****";
 
   test(
     "should create valid and unique user",
-    { tag: ["@users", "@postUser"] },
+    { tag: tags(TAG.API, TAG.USERS, TAG.POST_USER) },
     async ({ request }) => {
       // Arrange:
 
@@ -48,7 +49,7 @@ test.describe("POST /users", () => {
   for (const apiTestCase of apiRequiredFieldCases) {
     test(
       apiTestCase.testName,
-      { tag: ["@users", "@postUser"] },
+      { tag: tags(TAG.API, TAG.USERS, TAG.POST_USER) },
       async ({ request }) => {
         // Arrange:
         const { testName: _testName, ...invalidPayload } = apiTestCase;

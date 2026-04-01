@@ -46,6 +46,8 @@ The suite targets a local app running at `http://localhost:3000`.
     |       |-- put-user.spec.ts
     |       `-- test-data/
     |           `-- user.data.ts
+    |-- config/
+    |   `-- test-tags.ts
     `-- ui/
         |-- config/
         |   `-- ui-ulr.ts
@@ -106,7 +108,7 @@ BEARER_TOKEN=
 
 ## ▶️ Running Tests
 
-Main scripts:
+Basic commands:
 
 ```bash
 # Run all tests
@@ -115,51 +117,11 @@ npm test
 # Run in headed mode
 npm run test:headed
 
-# Run in debug mode
-npm run test:debug
-
-# Open Playwright UI mode
-npm run test:ui
-
-# Run GET /users API spec
-npm run test:api:get-users
-
-# Run smoke tests
-npm run test:smoke
-
-# Open HTML report
-npm run report
-
-# Install Playwright browsers
-npm run install:browsers
-```
-
-Direct Playwright commands:
-
-```bash
-# Run all tests
-npx playwright test
-
-# Run UI tests only
-npx playwright test tests/ui --project=chromium
-
 # Run API tests only
 npx playwright test tests/api --project=api
 
-# Run articles UI tests only
-npx playwright test tests/ui/articles --project=chromium
-
-# Run articles API tests only
-npx playwright test tests/api/articles --project=api
-
-# Run a single API spec
-npx playwright test tests/api/users/get-users.spec.ts --project=api
-
-# Run a single articles API spec
-npx playwright test tests/api/articles/get-articles.spec.ts --project=api
-
-# Open HTML report
-npx playwright show-report
+# Run UI tests only
+npx playwright test tests/ui --project=chromium
 ```
 
 Configuration summary:
@@ -170,7 +132,7 @@ Configuration summary:
 - projects: `chromium`, `api`
 - `workers: 1`
 
-For complete list of scenarios and more commands, see [Test Suite Documentation](TESTS.md).
+For the full command reference, scenarios, and targeted test runs, see [Test Suite Documentation](TESTS.md).
 
 ## Tested Application
 
