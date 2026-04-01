@@ -1,11 +1,12 @@
 import { request, FullConfig } from "@playwright/test";
 import * as fs from "fs";
+import { API_ENDPOINTS } from "./tests/api/config/api-endpoints";
 
 async function globalSetup(config: FullConfig) {
   const context = await request.newContext();
-  const baseURL = "http://localhost:3000";
+  const baseURL = config.projects[0].use.baseURL;
 
-  const response = await context.post(`${baseURL}/api/login`, {
+  const response = await context.post(`${baseURL}${API_ENDPOINTS.LOGIN}`, {
     data: {
       email: process.env.TEST_USER_EMAIL,
       password: process.env.TEST_USER_PASSWORD,

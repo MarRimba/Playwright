@@ -1,40 +1,39 @@
 import { test, expect } from "@playwright/test";
 import { UI_URL } from "../config/ui-ulr";
 import { ArticlesPage } from "../../../pages/articles.page";
+import { API_STATUS_CODES } from "../../api/config/api-status-codes";
 
 test.describe("should display a list of articles", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/");
+    const response = await page.goto("/");
+    expect(response?.status()).toBe(API_STATUS_CODES.OK);
   });
 
-  test(
-    "test",
-    { tag: ["@articles", "@getArticles"] },
-    async ({ page }) => {
-      // Arrange:
-      const articlesPage = new ArticlesPage(page);
-      const firstPageArticleTitle = "Myth: Testing is only for";
+  test("should display list of articles for 1st and next 2nd page", { tag: ["@articles", "@getArticles"] }, async ({ page }) => {
+    // Arrange:
+    const articlesPage = new ArticlesPage(page);
+    const firstPageArticleTitle = "Myth: Testing is only for";
 
-      // Act:
-      await page.getByRole("link", { name: "Articles" }).click();
-      await page.getByRole("link", { name: firstPageArticleTitle }).click();
-      await expect(page.getByText(firstPageArticleTitle)).toBeVisible();
+    // Act:
+    await page.getByRole("link", { name: "Articles" }).click();
+    await page.getByRole("link", { name: firstPageArticleTitle }).click();
+    await expect(page.getByText(firstPageArticleTitle)).toBeVisible();
 
-      await page.goto(`${UI_URL.ARTICLE}.html`);
-      await expect(articlesPage.nextButton).toBeEnabled();
-      await articlesPage.nextButton.click();
+    const articlesResponse = await page.goto(`${UI_URL.ARTICLE}.html`);
+    expect(articlesResponse?.status()).toBe(API_STATUS_CODES.OK);
+    await expect(articlesPage.nextButton).toBeEnabled();
+    await articlesPage.nextButton.click();
 
-      // Assert page 2 is loaded:
-      await expect(articlesPage.currentPage).toHaveText("2");
+    // Assert page 2 is loaded:
+    await expect(articlesPage.currentPage).toHaveText("2");
 
-      const secondArticleLink = articlesPage.getArticleTitleLink(1);
-      const secondArticleTitle = await secondArticleLink.textContent();
-      await secondArticleLink.click();
+    const secondArticleLink = articlesPage.getArticleTitleLink(1);
+    const secondArticleTitle = await secondArticleLink.textContent();
+    await secondArticleLink.click();
 
-      // Assert:
-      await expect(
-        page.getByText(secondArticleTitle!, { exact: true }),
-      ).toBeVisible();
-    },
-  );
+    // Assert:
+    await expect(
+      page.getByText(secondArticleTitle!, { exact: true }),
+    ).toBeVisible();
+  });
 });
