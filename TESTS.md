@@ -6,7 +6,7 @@ Complete overview of automated tests organized by module and functionality. Test
 
 ### 🔗 API Tests
 
-API tests verify backend functionality through HTTP requests. Requests use shared config from `tests/api/config` and authorization prepared in global setup.
+API tests verify backend functionality through HTTP requests. Requests use shared config from `tests/config` (endpoints, headers, status codes) and authorization prepared in global setup.
 
 #### 🔑 Authentication
 
@@ -103,6 +103,17 @@ Test data files provide fixtures and reusable payloads:
 | User registration test data              | `tests/ui/users/test-data/register.data.ts`    |
 | Article payload, test user credentials   | `tests/ui/articles/test-data/articles.data.ts` |
 | API user payloads and test IDs           | `tests/api/users/test-data/user.data.ts`       |
+
+## ⚙️ Configuration Files
+
+All configuration constants are stored in `tests/config/`:
+
+| File               | Purpose                                                                  |
+| ------------------ | ------------------------------------------------------------------------ |
+| `api-constants.ts` | API endpoints and HTTP status codes used across all API tests            |
+| `api-headers.ts`   | Authorization headers helper and BEARER_TOKEN logic from global setup    |
+| `test-tags.ts`     | Test tags for filtering (e.g., @smoke, @api, @ui) used in all spec files |
+| `ui-constants.ts`  | UI route URLs for navigation in browser tests                            |
 
 ## Running Tests
 

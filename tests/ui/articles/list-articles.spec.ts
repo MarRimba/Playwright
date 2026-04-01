@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { UI_URL } from "../config/ui-ulr";
+import { UI_URL } from "../../config/ui-constants";
 import { ArticlesPage } from "../../../pages/articles.page";
-import { API_STATUS_CODES } from "../../api/config/api-status-codes";
+import { API_STATUS_CODES } from "../../config/api-constants";
 import { TAG, tags } from "../../config/test-tags";
 
 test.describe("should display a list of articles", () => {

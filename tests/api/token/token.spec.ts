@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { API_ENDPOINTS } from "../config/api-endpoints";
+import { API_ENDPOINTS } from "../../config/api-constants";
 import { TAG, tags } from "../../config/test-tags";
 
 test.describe("GET /login", () => {

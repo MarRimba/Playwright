@@ -4,9 +4,8 @@ import {
   patchUserPayload,
   userIds,
 } from "./test-data/user.data";
-import { API_ENDPOINTS } from "../config/api-endpoints";
-import { API_HEADERS } from "../config/api-headers";
-import { API_STATUS_CODES } from "../config/api-status-codes";
+import { API_ENDPOINTS, API_STATUS_CODES } from "../../config/api-constants";
+import { API_HEADERS } from "../../config/api-headers";
 import { TAG, tags } from "../../config/test-tags";
 
 test.describe("PUT /users/{id}", () => {

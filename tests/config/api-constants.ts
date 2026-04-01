@@ -1,3 +1,9 @@
+export const API_ENDPOINTS = {
+  USERS: "/api/users",
+  LOGIN: "/api/login",
+  ARTICLES: "api/articles",
+} as const;
+
 export const API_STATUS_CODES = {
   OK: 200,
   CREATED: 201,

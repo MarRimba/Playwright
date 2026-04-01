@@ -24,18 +24,17 @@ The suite targets a local app running at `http://localhost:3000`.
 |-- README.md
 |-- TESTS.md
 |-- tsconfig.json
+|-- assets/
+|   `-- test-report.png
 |-- pages/
 |   |-- articles.page.ts
 |   |-- login.page.ts
 |   `-- register.page.ts
+|-- test-results/
 `-- tests/
     |-- api/
     |   |-- articles/
     |   |   `-- get-articles.spec.ts
-    |   |-- config/
-    |   |   |-- api-endpoints.ts
-    |   |   |-- api-headers.ts
-    |   |   `-- api-status-codes.ts
     |   |-- token/
     |   |   `-- token.spec.ts
     |   `-- users/
@@ -47,10 +46,11 @@ The suite targets a local app running at `http://localhost:3000`.
     |       `-- test-data/
     |           `-- user.data.ts
     |-- config/
-    |   `-- test-tags.ts
+    |   |-- api-constants.ts
+    |   |-- api-headers.ts
+    |   |-- test-tags.ts
+    |   `-- ui-constants.ts
     `-- ui/
-        |-- config/
-        |   `-- ui-ulr.ts
         |-- articles/
         |   |-- delete-article.spec.ts
         |   |-- list-articles.spec.ts
@@ -138,3 +138,7 @@ For the full command reference, scenarios, and targeted test runs, see [Test Sui
 
 - repo: `https://github.com/jaktestowac/gad-gui-api-demo`
 - local URL: `http://localhost:3000`
+
+## 📊 Test Report
+
+![Test Report](./assets/test-report.png)
