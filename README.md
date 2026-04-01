@@ -30,6 +30,8 @@ The suite targets a local app running at `http://localhost:3000`.
 |   `-- register.page.ts
 `-- tests/
     |-- api/
+    |   |-- articles/
+    |   |   `-- get-articles.spec.ts
     |   |-- config/
     |   |   |-- api-endpoints.ts
     |   |   |-- api-headers.ts
@@ -45,10 +47,10 @@ The suite targets a local app running at `http://localhost:3000`.
     |       `-- test-data/
     |           `-- user.data.ts
     `-- ui/
-      |-- config/
-      |   `-- ui-ulr.ts
+        |-- config/
+        |   `-- ui-ulr.ts
         |-- articles/
-      |   |-- delete-article.spec.ts
+        |   |-- delete-article.spec.ts
         |   |-- list-articles.spec.ts
         |   |-- post-article.spec.ts
         |   |-- update-article.spec.ts
@@ -119,6 +121,9 @@ npm run test:debug
 # Open Playwright UI mode
 npm run test:ui
 
+# Run GET /users API spec
+npm run test:api:get-users
+
 # Run smoke tests
 npm run test:smoke
 
@@ -144,8 +149,14 @@ npx playwright test tests/api --project=api
 # Run articles UI tests only
 npx playwright test tests/ui/articles --project=chromium
 
+# Run articles API tests only
+npx playwright test tests/api/articles --project=api
+
 # Run a single API spec
 npx playwright test tests/api/users/get-users.spec.ts --project=api
+
+# Run a single articles API spec
+npx playwright test tests/api/articles/get-articles.spec.ts --project=api
 
 # Open HTML report
 npx playwright show-report

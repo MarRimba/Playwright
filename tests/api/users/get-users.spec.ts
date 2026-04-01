@@ -7,13 +7,6 @@ test.describe("GET /users", () => {
     id: number;
   };
 
-  let allUsers: User[] = [];
-
-  test.beforeAll(async ({ request }) => {
-    const response = await request.get(API_ENDPOINTS.USERS);
-    allUsers = (await response.json()) as User[];
-  });
-
   test(
     "should return all users from database",
     { tag: ["@smoke", "@users", "@getUsers"] },
@@ -21,19 +14,23 @@ test.describe("GET /users", () => {
       // Arrange:
 
       // Act:
-      const response = await request.get(API_ENDPOINTS.USERS);
-      const responseBody = (await response.json()) as User[];
+      const usersResponse = await request.get(API_ENDPOINTS.USERS);
+      const responseBody = (await usersResponse.json()) as User[];
 
       // Assert:
       expect(
-        response.status(),
+        usersResponse.status(),
         `For GET /users we expect status code: ${API_STATUS_CODES.OK}`,
       ).toBe(API_STATUS_CODES.OK);
 
       expect(
+        Array.isArray(responseBody),
+        "Expected response body to be an array",
+      ).toBeTruthy();
+      expect(
         responseBody.length,
-        `Expected all ${allUsers.length} users, received: ${responseBody.length}`,
-      ).toBe(allUsers.length);
+        "Expected users list to contain at least one user",
+      ).toBeGreaterThan(0);
     },
   );
 
@@ -42,6 +39,8 @@ test.describe("GET /users", () => {
     { tag: ["@users", "@getUsers"] },
     async ({ request }) => {
       // Arrange:
+      const usersResponse = await request.get(API_ENDPOINTS.USERS);
+      const allUsers = (await usersResponse.json()) as User[];
       const randomUser = allUsers[Math.floor(Math.random() * allUsers.length)];
 
       // Act:

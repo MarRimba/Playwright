@@ -49,6 +49,15 @@ API tests verify backend functionality through HTTP requests. Requests use share
 | ------------------------------------------ | ------------------------------------- | ------------------------------------------------------------------------------ |
 | Create new and unique user for delete test | `tests/api/users/delete-user.spec.ts` | Creates user, logs in with new credentials, deletes account, verifies deletion |
 
+#### 📰 Articles Management
+
+**📥 GET operations**
+
+| Test                                                | File                                      | Purpose                                                           |
+| --------------------------------------------------- | ----------------------------------------- | ----------------------------------------------------------------- |
+| Return list of articles                             | `tests/api/articles/get-articles.spec.ts` | Fetches article list and validates response shape                 |
+| Return randomly selected article from articles list | `tests/api/articles/get-articles.spec.ts` | Retrieves a specific article by ID selected from the current list |
+
 ### 🎨 UI Tests
 
 UI tests verify user-facing functionality through browser interactions. Tests run in the `chromium` project with tracing enabled on first retry.
@@ -108,6 +117,7 @@ npx playwright test
 npm run test:headed
 npm run test:debug
 npm run test:ui
+npm run test:api:get-users
 npm run test:smoke
 npm run report
 npm run install:browsers
@@ -117,8 +127,10 @@ npx playwright test --project=chromium
 npx playwright test --project=api
 
 # Specific scope
+npx playwright test tests/api/articles/
 npx playwright test tests/api/users/
 npx playwright test tests/ui/articles/
+npx playwright test tests/api/articles/get-articles.spec.ts --project=api
 npx playwright test tests/api/users/post-user.spec.ts
 npx playwright test tests/ui/articles/delete-article.spec.ts --project=chromium
 

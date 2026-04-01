@@ -19,7 +19,7 @@ test.describe("Delete article", () => {
     await loginPage.loginButton.click();
   });
 
-  test.only(
+  test(
     "should delete article",
     { tag: ["@articles", "@deleteArticle"] },
     async ({ page }) => {
