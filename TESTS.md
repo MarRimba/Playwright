@@ -77,13 +77,12 @@ UI tests verify user-facing functionality through browser interactions. Tests ru
 
 **📄 Articles**
 
-| Test                                        | File                                        | Purpose                                                                                                              |
-| ------------------------------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| Should display a list of articles           | `tests/ui/articles/list-articles.spec.ts`   | Navigates to articles section, opens an article, moves to the next page, and verifies another article is displayed |
-| Should add article with valid data          | `tests/ui/articles/post-article.spec.ts`    | Creates an article after login by filling title, body, image, and verifying the success message                    |
-| Should update article title with valid data | `tests/ui/articles/update-article.spec.ts`  | Logs in as test user, navigates to an owned article, edits title, and verifies the success alert                   |
-| Should delete article                       | `tests/ui/articles/delete-article.spec.ts`  | Creates an article, opens it from the list, confirms the delete dialog, and verifies the article disappears        |
-
+| Test                                        | File                                       | Purpose                                                                                                            |
+| ------------------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| Should display a list of articles           | `tests/ui/articles/list-articles.spec.ts`  | Navigates to articles section, opens an article, moves to the next page, and verifies another article is displayed |
+| Should add article with valid data          | `tests/ui/articles/post-article.spec.ts`   | Creates an article after login by filling title, body, image, and verifying the success message                    |
+| Should update article title with valid data | `tests/ui/articles/update-article.spec.ts` | Logs in as test user, navigates to an owned article, edits title, and verifies the success alert                   |
+| Should delete article                       | `tests/ui/articles/delete-article.spec.ts` | Creates an article, opens it from the list, confirms the delete dialog, and verifies the article disappears        |
 
 ## 💾 Test Data
 
