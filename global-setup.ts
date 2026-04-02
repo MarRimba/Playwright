@@ -1,6 +1,6 @@
 import { request, FullConfig } from "@playwright/test";
 import * as fs from "fs";
-import { API_ENDPOINTS } from "./tests/config/api-constants";
+import { API_ENDPOINTS } from "./src/config/api-constants";
 
 async function globalSetup(config: FullConfig) {
   const context = await request.newContext();

@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../../../pages/login.page";
-import { ArticlesPage } from "../../../pages/articles.page";
+import { LoginPage } from "../../../src/pages/login.page";
+import { ArticlesPage } from "../../../src/pages/articles.page";
 import { articlePayload } from "./test-data/articles.data";
 import { loginUserData } from "./test-data/articles.data";
-import { TAG, tags } from "../../config/test-tags";
+import { TAG, tags } from "../../../src/config/test-tags";
 
 test.describe("Delete article", () => {
   let loginPage: LoginPage;

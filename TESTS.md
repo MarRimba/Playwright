@@ -6,7 +6,7 @@ Complete overview of automated tests organized by module and functionality. Test
 
 ### 🔗 API Tests
 
-API tests verify backend functionality through HTTP requests. Requests use shared config from `tests/config` (endpoints, headers, status codes) and authorization prepared in global setup.
+API tests verify backend functionality through HTTP requests. Requests use shared config from `src/config` (endpoints, headers, status codes) and authorization prepared in global setup.
 
 #### 🔑 Authentication
 
@@ -115,7 +115,7 @@ Test data files provide fixtures and reusable payloads:
 
 ## ⚙️ Configuration Files
 
-All configuration constants are stored in `tests/config/`:
+All configuration constants are stored in `src/config/`:
 
 | File               | Purpose                                                                  |
 | ------------------ | ------------------------------------------------------------------------ |

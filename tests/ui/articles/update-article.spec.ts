@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../../../pages/login.page";
-import { ArticlesPage } from "../../../pages/articles.page";
+import { LoginPage } from "../../../src/pages/login.page";
+import { ArticlesPage } from "../../../src/pages/articles.page";
 import { testUserData } from "./test-data/articles.data";
-import { TAG, tags } from "../../config/test-tags";
+import { TAG, tags } from "../../../src/config/test-tags";
 
 test.describe("Update article", () => {
   let loginPage: LoginPage;

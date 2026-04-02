@@ -1,7 +1,10 @@
 import { expect, test } from "@playwright/test";
 import { apiRequiredFieldCases, userPayload } from "./test-data/user.data";
-import { API_ENDPOINTS, API_STATUS_CODES } from "../../config/api-constants";
-import { TAG, tags } from "../../config/test-tags";
+import {
+  API_ENDPOINTS,
+  API_STATUS_CODES,
+} from "../../../src/config/api-constants";
+import { TAG, tags } from "../../../src/config/test-tags";
 
 test.describe("POST /users", () => {
   const expectedMaskedValue = "****";

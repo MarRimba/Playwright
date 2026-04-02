@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
-import { UI_URL } from "../../config/ui-constants";
-import { ArticlesPage } from "../../../pages/articles.page";
-import { API_STATUS_CODES } from "../../config/api-constants";
-import { TAG, tags } from "../../config/test-tags";
+import { UI_URL } from "../../../src/config/ui-constants";
+import { ArticlesPage } from "../../../src/pages/articles.page";
+import { API_STATUS_CODES } from "../../../src/config/api-constants";
+import { TAG, tags } from "../../../src/config/test-tags";
 
 test.describe("should display a list of articles", () => {
   test.beforeEach(async ({ page }) => {

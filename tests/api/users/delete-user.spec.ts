@@ -1,7 +1,10 @@
 import { expect, test } from "@playwright/test";
-import { API_ENDPOINTS, API_STATUS_CODES } from "../../config/api-constants";
+import {
+  API_ENDPOINTS,
+  API_STATUS_CODES,
+} from "../../../src/config/api-constants";
 import { userPayload } from "./test-data/user.data";
-import { TAG, tags } from "../../config/test-tags";
+import { TAG, tags } from "../../../src/config/test-tags";
 
 test.describe("DELETE /users", () => {
   test(

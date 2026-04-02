@@ -26,10 +26,17 @@ The suite targets a local app running at `http://localhost:3000`.
 |-- tsconfig.json
 |-- assets/
 |   `-- test-report.png
-|-- pages/
-|   |-- articles.page.ts
-|   |-- login.page.ts
-|   `-- register.page.ts
+|-- src/
+|   |-- config/
+|   |   |-- api-constants.ts
+|   |   |-- api-headers.ts
+|   |   |-- test-tags.ts
+|   |   `-- ui-constants.ts
+|   |-- fixtures/
+|   `-- pages/
+|       |-- articles.page.ts
+|       |-- login.page.ts
+|       `-- register.page.ts
 |-- test-results/
 `-- tests/
     |-- api/
@@ -48,11 +55,6 @@ The suite targets a local app running at `http://localhost:3000`.
     |       |-- put-user.spec.ts
     |       `-- test-data/
     |           `-- user.data.ts
-    |-- config/
-    |   |-- api-constants.ts
-    |   |-- api-headers.ts
-    |   |-- test-tags.ts
-    |   `-- ui-constants.ts
     `-- ui/
         |-- articles/
         |   |-- delete-article.spec.ts

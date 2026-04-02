@@ -1,11 +1,14 @@
 import { test, expect } from "@playwright/test";
-import { API_ENDPOINTS, API_STATUS_CODES } from "../../config/api-constants";
+import {
+  API_ENDPOINTS,
+  API_STATUS_CODES,
+} from "../../../src/config/api-constants";
 import {
   articlePayload,
   defaultApiRequiredFieldCases,
 } from "./test-data/article.data";
-import { API_HEADERS } from "../../config/api-headers";
-import { TAG, tags } from "../../config/test-tags";
+import { API_HEADERS } from "../../../src/config/api-headers";
+import { TAG, tags } from "../../../src/config/test-tags";
 
 test.describe("/POST article", () => {
   const headers = API_HEADERS.AUTHORIZED();

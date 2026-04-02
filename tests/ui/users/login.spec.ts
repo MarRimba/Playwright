@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { invalidLoginCases, loginUserData } from "./test-data/login.data";
-import { LoginPage } from "../../../pages/login.page";
-import { TAG, tags } from "../../config/test-tags";
+import { LoginPage } from "../../../src/pages/login.page";
+import { TAG, tags } from "../../../src/config/test-tags";
 
 test.describe("User login process", () => {
   let loginPage: LoginPage;
