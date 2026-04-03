@@ -1,7 +1,7 @@
 export const API_ENDPOINTS = {
   USERS: "/api/users",
   LOGIN: "/api/login",
-  ARTICLES: "api/articles",
+  ARTICLES: "/api/articles",
 } as const;
 
 export const API_STATUS_CODES = {
