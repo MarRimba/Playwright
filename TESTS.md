@@ -66,6 +66,20 @@ API tests verify backend functionality through HTTP requests. Requests use share
 | POST article validations (multiple cases) | `tests/api/articles/post-article.spec.ts` | Tests missing required fields: title, body, date - expects 422 status |
 | Should create article without image       | `tests/api/articles/post-article.spec.ts` | Creates article without optional image field, expects 201 status      |
 
+**🛠️ PATCH operations**
+
+| Test                                   | File                                       | Purpose                                                                                                                                         |
+| -------------------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Should update an article with given ID | `tests/api/articles/patch-article.spec.ts` | Fetches articles filtered by `user_id`, verifies ownership, updates a random article title with `UPDATED ` prefix, and checks the title changed |
+
+**🔄 PUT operations**
+
+| Test                                                  | File                                     | Purpose                                                                                                                |
+| ----------------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Should update all article data for given article      | `tests/api/articles/put-article.spec.ts` | Fetches a random owned article, updates the full payload with `PUT`, and verifies title, body, and image were replaced |
+| PUT article validations (negative cases)              | `tests/api/articles/put-article.spec.ts` | Validates required fields during full article updates and expects `422 Unprocessable Entity`                           |
+| Should not update article due to invalid JSON payload | `tests/api/articles/put-article.spec.ts` | Sends malformed JSON in a `PUT` request and expects `400 Bad Request`                                                  |
+
 ### 🎨 UI Tests
 
 UI tests verify user-facing functionality through browser interactions. Tests run in the `chromium` project with tracing enabled on first retry.
@@ -126,57 +140,39 @@ All configuration constants are stored in `src/config/`:
 
 ## Running Tests
 
-Full command reference:
+Common commands:
 
 ```bash
 # All tests
 npm test
-npx playwright test
 
 # npm scripts
 npm run test:headed
 npm run test:debug
 npm run test:ui
-npm run test:login
-npm run test:register
-npm run test:api:get-users
+npm run test:ui:mode
+npm run test:api
 npm run test:smoke
 npm run report
 npm run install:browsers
 
-# Projects
-npx playwright test --project=chromium
-npx playwright test --project=api
-npx playwright test tests/ui --project=chromium
-npx playwright test tests/api --project=api
-
-# Specific scope
+# Targeted runs
 npx playwright test tests/api/articles/
 npx playwright test tests/api/users/
 npx playwright test tests/ui/users/
-npx playwright test tests/ui/articles/
-npx playwright test tests/api/articles/get-articles.spec.ts --project=api
-npx playwright test tests/api/users/get-users.spec.ts --project=api
-npx playwright test tests/api/users/post-user.spec.ts
+npx playwright test tests/api/articles/patch-article.spec.ts --project=api
+npx playwright test tests/api/articles/put-article.spec.ts --project=api
 npx playwright test tests/ui/users/login.spec.ts --project=chromium
-npx playwright test tests/ui/users/register.spec.ts --project=chromium
-npx playwright test tests/ui/articles/delete-article.spec.ts --project=chromium
 
 # Filter tests
-npx playwright test --grep "should create"
 npx playwright test --grep @smoke
-npx playwright test --grep @api
-npx playwright test --grep @ui
-npx playwright test --grep "@users.*@login|@login.*@users"
 
 # Execution modes
 npx playwright test --headed              # visible browser
 npx playwright test --debug               # step-by-step debugging
-npx playwright test --workers=1           # sequential execution
 
 # Reports
 npx playwright show-report                # HTML report
-npx playwright test --reporter=list       # list format
 ```
 
 ## Notes

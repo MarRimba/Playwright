@@ -42,7 +42,9 @@ The suite targets a local app running at `http://localhost:3000`.
     |-- api/
     |   |-- articles/
     |   |   |-- get-articles.spec.ts
+    |   |   |-- patch-article.spec.ts
     |   |   |-- post-article.spec.ts
+    |   |   |-- put-article.spec.ts
     |   |   `-- test-data/
     |   |       `-- article.data.ts
     |   |-- token/
@@ -127,6 +129,9 @@ npx playwright test tests/api --project=api
 
 # Run UI tests only
 npx playwright test tests/ui --project=chromium
+
+# Run PUT article API tests only
+npx playwright test tests/api/articles/put-article.spec.ts --project=api
 ```
 
 Configuration summary:
