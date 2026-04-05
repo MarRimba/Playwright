@@ -5,13 +5,13 @@ import {
 } from "../../../src/config/api-constants";
 import { TAG, tags } from "../../../src/config/test-tags";
 
-test.describe("/GET Articles", () => {
+test.describe("GET /articles", () => {
   type Article = {
     id: number;
   };
 
   test(
-    "should get a list of articles",
+    "should return a list of articles",
     { tag: tags(TAG.API, TAG.SMOKE, TAG.ARTICLES, TAG.GET_ARTICLES) },
     async ({ request }) => {
       //Arrange:
@@ -39,7 +39,7 @@ test.describe("/GET Articles", () => {
   );
 
   test(
-    "should return randomly selected article from articles list",
+    "should return an article selected from the articles list",
     { tag: tags(TAG.API, TAG.ARTICLES, TAG.GET_ARTICLES) },
     async ({ request }) => {
       //Arrange:

@@ -25,24 +25,30 @@ test.describe("Add article", () => {
     { tag: tags(TAG.UI, TAG.ARTICLES, TAG.POST_ARTICLE) },
     async ({ page }) => {
       // Arrange:
+      const createdArticleTitle = `${articlePayload.title} ${Date.now()}`;
+      const createdArticleBodySnippet = articlePayload.body.slice(0, 40);
 
       // Act:
       await articlesPage.articlesLink.click();
       await articlesPage.addArticleButton.click();
-      await articlesPage.titleInput.fill(articlePayload.title);
+      await articlesPage.titleInput.fill(createdArticleTitle);
       await articlesPage.bodyInput.fill(articlePayload.body);
       await articlesPage.imageSelect.selectOption(articlePayload.image);
       await articlesPage.saveButton.click();
 
       // Assert:
-      const alertPopup = page.getByTestId("alert-popup");
+      await expect(page).toHaveURL(/article\.html\?id=\d+/);
+      await expect(
+        page.getByText(createdArticleTitle, { exact: true }),
+      ).toBeVisible();
+      await expect(page.getByText(createdArticleBodySnippet)).toBeVisible();
 
-      await expect(alertPopup).toBeVisible();
-      await expect(alertPopup).toContainText("Article was created");
+      await page.reload();
 
-      await expect(page).toHaveURL(
-        /article\.html\?id=\d+&msg=Article%20was%20created/,
-      );
+      await expect(
+        page.getByText(createdArticleTitle, { exact: true }),
+      ).toBeVisible();
+      await expect(page.getByText(createdArticleBodySnippet)).toBeVisible();
     },
   );
 });

@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../../../src/pages/login.page";
 import { ArticlesPage } from "../../../src/pages/articles.page";
-import { testUserData } from "./test-data/articles.data";
+import { articlePayload, testUserData } from "./test-data/articles.data";
 import { TAG, tags } from "../../../src/config/test-tags";
 
 test.describe("Update article", () => {
@@ -24,25 +24,40 @@ test.describe("Update article", () => {
     { tag: tags(TAG.UI, TAG.ARTICLES, TAG.UPDATE_ARTICLE) },
     async ({ page }) => {
       // Arrange:
+      const createdArticleTitle = `${articlePayload.title} ${Date.now()}`;
+      const updatedArticleTitle = `UPDATED ${createdArticleTitle}`;
+      const updatedArticleBodySnippet = articlePayload.body.slice(0, 40);
 
       // Act:
-      await articlesPage.myArticlesButton.click();
-      await page.getByTestId("article-37").click();
-      await page
-        .getByRole("link", { name: "What is Playwright and why" })
-        .click();
+      await articlesPage.articlesLink.click();
+      await articlesPage.addArticleButton.click();
+      await articlesPage.titleInput.fill(createdArticleTitle);
+      await articlesPage.bodyInput.fill(articlePayload.body);
+      await articlesPage.imageSelect.selectOption(articlePayload.image);
+      await articlesPage.saveButton.click();
+
       await articlesPage.editButton.click();
       await articlesPage.titleInput.press("Home");
-      await articlesPage.titleInput.fill(
-        "UPDATE: What is Playwright and why use it?",
-      );
+      await articlesPage.titleInput.fill(updatedArticleTitle);
       await articlesPage.updateButton.click();
 
       // Assert:
-      await expect(articlesPage.alertPopup).toBeVisible();
-      await expect(articlesPage.alertPopup).toContainText(
-        "Article was updated",
-      );
+      await expect(
+        page.getByText(updatedArticleTitle, { exact: true }),
+      ).toBeVisible();
+      await expect(
+        page.getByText(createdArticleTitle, { exact: true }),
+      ).toHaveCount(0);
+      await expect(page.getByText(updatedArticleBodySnippet)).toBeVisible();
+
+      await page.reload();
+
+      await expect(
+        page.getByText(updatedArticleTitle, { exact: true }),
+      ).toBeVisible();
+      await expect(
+        page.getByText(createdArticleTitle, { exact: true }),
+      ).toHaveCount(0);
     },
   );
 });

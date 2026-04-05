@@ -16,12 +16,21 @@ test.describe("should display a list of articles", () => {
     async ({ page }) => {
       // Arrange:
       const articlesPage = new ArticlesPage(page);
-      const firstPageArticleTitle = "Myth: Testing is only for";
 
       // Act:
       await page.getByRole("link", { name: "Articles" }).click();
-      await page.getByRole("link", { name: firstPageArticleTitle }).click();
-      await expect(page.getByText(firstPageArticleTitle)).toBeVisible();
+      await expect(articlesPage.articleCards.first()).toBeVisible();
+
+      const firstPageArticleTitle = await articlesPage
+        .getArticleTitleLink(0)
+        .textContent();
+
+      expect(firstPageArticleTitle?.trim()).toBeTruthy();
+
+      await articlesPage.getArticleTitleLink(0).click();
+      await expect(
+        page.getByText(firstPageArticleTitle!.trim(), { exact: true }),
+      ).toBeVisible();
 
       const articlesResponse = await page.goto(`${UI_URL.ARTICLE}.html`);
       expect(articlesResponse?.status()).toBe(API_STATUS_CODES.OK);
@@ -33,11 +42,17 @@ test.describe("should display a list of articles", () => {
 
       const secondArticleLink = articlesPage.getArticleTitleLink(1);
       const secondArticleTitle = await secondArticleLink.textContent();
+
+      expect(secondArticleTitle?.trim()).toBeTruthy();
+      expect(secondArticleTitle?.trim()).not.toBe(
+        firstPageArticleTitle?.trim(),
+      );
+
       await secondArticleLink.click();
 
       // Assert:
       await expect(
-        page.getByText(secondArticleTitle!, { exact: true }),
+        page.getByText(secondArticleTitle!.trim(), { exact: true }),
       ).toBeVisible();
     },
   );

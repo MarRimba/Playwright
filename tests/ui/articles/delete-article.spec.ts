@@ -25,10 +25,11 @@ test.describe("Delete article", () => {
     { tag: tags(TAG.UI, TAG.ARTICLES, TAG.DELETE_ARTICLE) },
     async ({ page }) => {
       // Arrange:
+      const createdArticleTitle = `${articlePayload.title} ${Date.now()}`;
 
       await articlesPage.articlesLink.click();
       await articlesPage.addArticleButton.click();
-      await articlesPage.titleInput.fill(articlePayload.title);
+      await articlesPage.titleInput.fill(createdArticleTitle);
       await articlesPage.bodyInput.fill(articlePayload.body);
       await articlesPage.imageSelect.selectOption(articlePayload.image);
       await articlesPage.saveButton.click();
@@ -41,12 +42,15 @@ test.describe("Delete article", () => {
 
       await page.goto(articleDetailsUrl);
       await expect(page).toHaveURL(articleDetailsUrl);
+      await expect(
+        page.getByText(createdArticleTitle, { exact: true }),
+      ).toBeVisible();
 
       // Act:
 
       await articlesPage.articlesLink.click();
       await articlesPage.articleTitleLinks
-        .filter({ hasText: articlePayload.title })
+        .filter({ hasText: createdArticleTitle })
         .click();
       page.once("dialog", (dialog) => {
         dialog.accept().catch(() => {});
@@ -57,7 +61,15 @@ test.describe("Delete article", () => {
       // Assert:
       await expect(
         articlesPage.articleTitleLinks.filter({
-          hasText: articlePayload.title,
+          hasText: createdArticleTitle,
+        }),
+      ).toHaveCount(0);
+
+      await page.reload();
+
+      await expect(
+        articlesPage.articleTitleLinks.filter({
+          hasText: createdArticleTitle,
         }),
       ).toHaveCount(0);
     },
