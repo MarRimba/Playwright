@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 
 export const userIds = {
     userIdToGet: 1,
-    userIdToDelete: 2,
+    userIdToDelete: 4,
     userIdToPatch: 4,
     userIdToPut: 4,
     userIdToTestPutComments: 3,

@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type APIRequestContext } from "@playwright/test";
 import { API_HEADERS } from "../../../src/config/api-headers";
 import {
   API_ENDPOINTS,
@@ -21,12 +21,16 @@ test.describe("PUT /articles/{id}", () => {
   };
   const headers = API_HEADERS.AUTHORIZED();
 
-  const getRandomArticleForUser = async (request: { get: Function }) => {
+  const getRandomArticleForUser = async (
+    request: APIRequestContext,
+  ): Promise<Article> => {
     const response = await request.get(
       `${API_ENDPOINTS.ARTICLES}?user_id=${userIds.userIdToPut}`,
       { headers },
     );
     const allArticlesGivenUser = (await response.json()) as Article[];
+
+    expect(allArticlesGivenUser.length).toBeGreaterThan(0);
 
     expect(
       allArticlesGivenUser.every(
